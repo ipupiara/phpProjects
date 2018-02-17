@@ -39,6 +39,11 @@ final class Index {
         spl_autoload_register([$this, 'loadClass']);
         // session
         session_start();
+        if (isset($_SESSION['page_count'])) {
+            $_SESSION['page_count'] += 1;
+        } else {
+            $_SESSION['page_count'] = 1;
+        }
     }
 
     /**
@@ -94,8 +99,7 @@ final class Index {
         return $page;
     }
 
-    private function 
-            runPage($page, array $extra = []) {
+    private function runPage($page, array $extra = []) {
         $run = false;
         if ($this->hasScript($page)) {
             $run = true;
