@@ -80,6 +80,17 @@ final class Index {
 
     private function getPage() {
         $page = self::DEFAULT_PAGE;
+        /*
+         * decide here if login credentials in $session are valid
+         * if no 
+         *      check if $get/put contains user/pwd values and check
+         *      if they are valid, update in $session user anyhow and pwd if pwd is valid,
+         *      also update $session->credentialsValid
+         *      set $page to default_page with user/password dialog
+         * 
+         * else allow the user-desired page to be loaded
+         *          
+         */
         if (array_key_exists('page', $_GET)) {
             $page = $_GET['page'];
         }
