@@ -35,30 +35,23 @@ final class TodoMapper {
      * @param array $properties
      */
     public static function map(Todo $todo, array $properties) {
-        if (array_key_exists('id', $properties)) {
-            $todo->setId($properties['id']);
+        if (array_key_exists('uid', $properties)) {
+            $todo->setId($properties['uid']);
         }
-        if (array_key_exists('priority', $properties)) {
-            $todo->setPriority($properties['priority']);
+        if (array_key_exists('pre_name', $properties)) {
+            $todo->setPriority($properties['pre_name']);
         }
-        if (array_key_exists('created_on', $properties)) {
-            $createdOn = self::createDateTime($properties['created_on']);
+        if (array_key_exists('dateAdded', $properties)) {
+            $createdOn = self::createDateTime($properties['dateAdded']);
             if ($createdOn) {
                 $todo->setCreatedOn($createdOn);
             }
         }
-        if (array_key_exists('due_on', $properties)) {
-            $dueOn = self::createDateTime($properties['due_on']);
-            if ($dueOn) {
-                $todo->setDueOn($dueOn);
-            }
-        }
-        if (array_key_exists('last_modified_on', $properties)) {
-            $lastModifiedOn = self::createDateTime($properties['last_modified_on']);
-            if ($lastModifiedOn) {
-                $todo->setLastModifiedOn($lastModifiedOn);
-            }
-        }
+ 
+   
+        
+        
+        
         if (array_key_exists('title', $properties)) {
             $todo->setTitle(trim($properties['title']));
         }

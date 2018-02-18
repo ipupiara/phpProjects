@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/petersData/projects/ApplyDB/dao/TodoDao.php</file>
-            <file>file:/D:/petersData/projects/ApplyDB/layout/index.phtml</file>
-            <file>file:/D:/petersData/projects/ApplyDB/dao/TodoSearchCriteria.php</file>
-            <file>file:/D:/petersData/projects/ApplyDB/web/index.php</file>
-            <file>file:/D:/petersData/projects/ApplyDB/dao/ApplySearchCriteria.php</file>
-            <file>file:/D:/petersData/projects/ApplyDB/config/config.ini</file>
-            <file>file:/D:/petersData/projects/ApplyDB/exception/NotFoundException.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/dao/TodoDao.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/layout/index.phtml</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/page/add-edit.phtml</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/page/add-edit.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/web/index.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/util/Utils.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/flash/Flash.php</file>
+            <file>file:/D:/petersData/phpProjects/ApplyDB/page/home.phtml</file>
         </group>
     </open-files>
 </project-private>

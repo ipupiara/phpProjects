@@ -22,36 +22,42 @@ final class Todo {
     const STATUS_VOIDED = "VOIDED";
 
     /** @var int */
-    private $id;
+    private $uid;
+    /** @var int */
+    private $pre_name;
     /** @var string */
-    private $priority;
-    /** @var DateTime */
-    private $createdOn;
-    /** @var DateTime */
-    private $dueOn;
-    /** @var DateTime */
-    private $lastModifiedOn;
+    private $name;
     /** @var string */
     private $title;
     /** @var string */
-    private $description;
+    private $company;
     /** @var string */
-    private $comment;
-    /** @var string one of PENDING/COMPLETED/VOIDED */
-    private $status;
-    /** @var boolean */
-    private $deleted;
-
+    private $address;
+    /** @var string */
+    private $zip_city;
+    /** @var string */
+    private $greeting_line;
+    /** @var string */
+    private $business;
+    /** @var string */
+    private $email;
+    /** @var string */
+    private $closedNeg;
+    /** @var int */
+    private $homepage;
+    /** @var string */
+     private $comments;
+    /** @var string */
+    private $dateAdded;
+    /** @var timestamp */
+         
 
     /**
      * Create new {@link Todo} with default properties set.
      */
     public function __construct() {
         $now = new DateTime();
-        $this->setCreatedOn($now);
-        $this->setLastModifiedOn($now);
-        $this->setStatus(self::STATUS_PENDING);
-        $this->setDeleted(false);
+        $this->setDateAdded($now);
     }
 
     public static function allStatuses() {
@@ -75,70 +81,41 @@ final class Todo {
     /**
      * @return int <i>null</i> if not persistent
      */
-    public function getId() {
-        return $this->id;
+    public function getUid() {
+        return $this->uid;
     }
 
-    public function setId($id) {
-        if ($this->id !== null
-                && $this->id != $id) {
-            throw new Exception('Cannot change identifier to ' . $id . ', already set to ' . $this->id);
+    public function setId($uid) {
+        if ($this->uid !== null
+                && $this->uid != $uid) {
+            throw new Exception('Cannot change identifier to ' . $uid . ', already set to ' . $this->uid);
         }
-        if ($id === null) {
-            $this->id = null;
+        if ($uid === null) {
+            $this->uid = null;
         } else {
-            $this->id = (int) $id;
+            $this->uid = (int) $uid;
         }
     }
 
-    /**
-     * @return int one of 1/2/3
-     */
-    public function getPriority() {
-        return $this->priority;
+   
+    public function getPreName() {
+        return $this->pre_name;
     }
 
-    public function setPriority($priority) {
-        TodoValidator::validatePriority($priority);
-        $this->priority = (int) $priority;
+    public function setPrename($prename) {
+        $this->pre_name = (int) $prename;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreatedOn() {
-        return $this->createdOn;
+  
+    public function getName() {
+        return $this->name;
     }
 
-    public function setCreatedOn(DateTime $createdOn) {
-        $this->createdOn = $createdOn;
+    public function setName($name) {
+        $this->name = $name;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getDueOn() {
-        return $this->dueOn;
-    }
 
-    public function setDueOn(DateTime $dueOn) {
-        $this->dueOn = $dueOn;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getLastModifiedOn() {
-        return $this->lastModifiedOn;
-    }
-
-    public function setLastModifiedOn(DateTime $lastModifiedOn) {
-        $this->lastModifiedOn = $lastModifiedOn;
-    }
-
-    /**
-     * @return string
-     */
     public function getTitle() {
         return $this->title;
     }
@@ -147,49 +124,81 @@ final class Todo {
         $this->title = $title;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription() {
-        return $this->description;
+    
+    public function getCompany() {
+        return $this->company;
     }
 
-    public function setDescription($description) {
-        $this->description = $description;
+    public function setCompany($company) {
+        $this->company = $company;
+    }
+    
+    public function getAddress() {
+        return $this->address;
     }
 
-    /**
-     * @return string
-     */
-    public function getComment() {
-        return $this->comment;
+    public function setAddress($address) {
+        $this->address = $address;
+    }
+    public function getZip_city() {
+        return $this->zip_city;
     }
 
-    public function setComment($comment) {
-        $this->comment = $comment;
+    public function setZip_city($zC) {
+        $this->zip_city = $zC;
+    }
+    public function getGreeting_line() {
+        return $this->greeting_line;
     }
 
-    /**
-     * @return string one of PENDING/DONE/VOIDED
-     */
-    public function getStatus() {
-        return $this->status;
+    public function setGreeting_line($title) {
+        $this->greeting_line = $title;
+    }
+    public function getBusiness() {
+        return $this->business;
     }
 
-    public function setStatus($status) {
-        TodoValidator::validateStatus($status);
-        $this->status = $status;
+    public function setBusiness($title) {
+        $this->business = $title;
+    }
+    public function getEmail() {
+        return $this->email;
     }
 
-    /**
-     * @return boolean
-     */
-    public function getDeleted() {
-        return $this->deleted;
+    public function setEmail($title) {
+        $this->email = $title;
+    }
+    
+    public function getClosedNeg() {
+        return $this->closedNeg;
     }
 
-    public function setDeleted($deleted) {
-        $this->deleted = (bool) $deleted;
+    public function setClosedNeg($cN) {
+        $this->closedNeg = $cN;
+    }
+        
+   public function getHomepage() {
+        return $this->homepage;
     }
 
+    public function setHomepage($hp) {
+        $this->homepage = $hp;
+    }
+ 
+   public function getComments() {
+        return $this->comments;
+    }
+
+    public function setComments($hp) {
+        $this->comments = $hp;
+    }   
+    
+    public function getDateAdded() {
+        return $this->dateAdded;
+    }
+
+    public function setDateAdded(DateTime $hp) {
+        $this->dateAdded = $hp;
+    }    
+    
 }
