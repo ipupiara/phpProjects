@@ -39,10 +39,12 @@ final class Index {
         spl_autoload_register([$this, 'loadClass']);
         // session
         session_start();
-        if (isset($_SESSION['page_count'])) {
-            $_SESSION['page_count'] += 1;
+         if (isset($_SESSION['credentialsValid'])) {
+            
         } else {
-            $_SESSION['page_count'] = 1;
+            $_SESSION['credentialsValid'] = 0;
+            $_SESSION['username']="user";
+            $_SESSION['password']="";
         }
     }
 
@@ -83,11 +85,13 @@ final class Index {
         /*
          * decide here if login credentials in $session are valid
          * if no 
-         *      check if $get/put contains user/pwd values and check
-         *      if they are valid, update in $session user anyhow and pwd if pwd is valid,
-         *      also update $session->credentialsValid
-         *      set $page to default_page with user/password dialog
+         *      check if $get contains user/pwd values (as below for page value in $_GET) 
+         *      update  user in $session
+         *      and check if credentials are valid now, 
+         *      update $session->credentialsValid
+         *          update in $session pwd if pwd is valid,
          * 
+         * if credentials are still no valid set $page to default_page (with user/password dialog)
          * else allow the user-desired page to be loaded
          *          
          */

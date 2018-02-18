@@ -48,7 +48,7 @@ function error_field($title, array $errors) {
     <fieldset>
         <div class="field">
             <label>Title:</label>
-            <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>"
+             <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>"
                    class="text<?php echo error_field('title', $errors); ?>"/>
         </div>
         <div class="field">
