@@ -27,6 +27,19 @@ final class TodoDao {
         // close db connection
         $this->db = null;
     }
+    
+    public static function credentialsValid($uname,$pwd)
+    {
+        $result = false;
+        $config = Config::getConfig('db');
+        try {
+            $dbx = new PDO($config['dsn'], $uname, $pwd);
+            $result = true;
+        } catch (Exception $ex) {
+ //           throw new Exception('DB connection error: ' . $ex->getMessage());
+        }
+        return $result;
+    }
 
     /**
      * Find all {@link Todo}s by search criteria.
@@ -98,7 +111,7 @@ final class TodoDao {
         }
         $config = Config::getConfig('db');
         try {
-            $this->db = new PDO($config['dsn'], $config['username'], $config['password']);
+            $this->db = new PDO($config['dsn'], $_SESSION['username'], $_SESSION['password']);
         } catch (Exception $ex) {
             throw new Exception('DB connection error: ' . $ex->getMessage());
         }

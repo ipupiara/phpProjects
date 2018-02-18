@@ -1,21 +1,22 @@
 <?php
 
-
 namespace TodoList;
-
 ?>
 <h1>Welcome!</h1> 
 <!--   within this page build, check for $session->credentialsValid and add user/pwd fields if needed   --> 
-<?php if ($_SESSION['credentialsValid']== 0): ?>
-<p class = "p"><b>please enter valid username and password</b>  </p>
-<p>    
-        username: <input type="text" name="username" value="<?php echo $_SESSION['username'] ?>" />
-</p>
-&nbsp;
-<p>    
-        password: <input type="password" name="password" value="<?php echo $_SESSION['password'] ?>" />
-</p>
-&nbsp;
+<?php if ( !$_SESSION['credentialsValid']): ?>
+    <form action="index.php">
+        <p class = "p"><b>please enter valid username and password</b>  </p>
+        <p>    
+            username: <input type="text" name="username" value="<?php echo $_SESSION['username'] ?>" />
+        </p>
+        &nbsp;
+        <p>    
+            password: <input type="password" name="password" value="<?php echo $_SESSION['password'] ?>" />
+        </p>
+        <input type="submit" value="Submit">
+    </form>
+    &nbsp;
 <?php endif; ?>
 <p class="p">Welcome to the NetBeans PHP IDE sample - <b>TODO List application</b>.</p>
 <ul class="p">

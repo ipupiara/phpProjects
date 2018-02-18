@@ -4,6 +4,7 @@ namespace TodoList;
 
 use \TodoList\Exception\NotFoundException;
 use \TodoList\Flash\Flash;
+use \TodoList\Dao\TodoDao;
 
 /**
  * Main application class.
@@ -42,7 +43,7 @@ final class Index {
          if (isset($_SESSION['credentialsValid'])) {
             
         } else {
-            $_SESSION['credentialsValid'] = 0;
+            $_SESSION['credentialsValid'] = false;
             $_SESSION['username']="user";
             $_SESSION['password']="";
         }
@@ -79,6 +80,8 @@ final class Index {
         }
         require_once __DIR__ . self::$CLASSES[$name];
     }
+    
+    
 
     private function getPage() {
         $page = self::DEFAULT_PAGE;
@@ -95,8 +98,22 @@ final class Index {
          * else allow the user-desired page to be loaded
          *          
          */
-        if (array_key_exists('page', $_GET)) {
-            $page = $_GET['page'];
+        if (array_key_exists('username', $_GET)) {
+            $uname = $_GET['username'];
+            $pwd = $_GET['password'];
+            $_SESSION['username'] = $uname;
+            if (TodoDao::credentialsValid($uname,$pwd)) {
+                $_SESSION['password'] = $pwd;
+                $_SESSION['credentialsValid'] = true;
+            } else {
+                $_SESSION['password'] = "";
+                $_SESSION['credentialsValid'] = false;               
+            }
+        }
+        if ($_SESSION['credentialsValid']) {
+            if (array_key_exists('page', $_GET)) {
+                 $page = $_GET['page'];
+            }
         }
         return $this->checkPage($page);
     }
