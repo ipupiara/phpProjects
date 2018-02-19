@@ -25,15 +25,6 @@ final class TodoValidator {
         if (!$todo->getCreatedOn()) {
             $errors[] = new \TodoList\Validation\ValidationError('createdOn', 'Empty or invalid Created On.');
         }
-        if (!$todo->getLastModifiedOn()) {
-            $errors[] = new \TodoList\Validation\ValidationError('lastModifiedOn', 'Empty or invalid Last Modified On.');
-        }
-        if (!trim($todo->getTitle())) {
-            $errors[] = new \TodoList\Validation\ValidationError('title', 'Title cannot be empty.');
-        }
-        if (!$todo->getDueOn()) {
-            $errors[] = new \TodoList\Validation\ValidationError('dueOn', 'Empty or invalid Due On.');
-        }
         if (!trim($todo->getPriority())) {
             $errors[] = new \TodoList\Validation\ValidationError('priority', 'Priority cannot be empty.');
         } elseif (!self::isValidPriority($todo->getPriority())) {
@@ -43,6 +34,9 @@ final class TodoValidator {
             $errors[] = new \TodoList\Validation\ValidationError('status', 'Status cannot be empty.');
         } elseif (!self::isValidStatus($todo->getStatus())) {
             $errors[] = new \TodoList\Validation\ValidationError('status', 'Invalid Status set.');
+        }
+        if (!trim($todo->getCompany())) {
+            $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.');
         }
         return $errors;
     }
