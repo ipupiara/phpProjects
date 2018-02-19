@@ -22,7 +22,9 @@ final class Todo {
     const STATUS_VOIDED = "VOIDED";
 
     /** @var int */
-    private $uid;
+    private $id;
+    /** @var string */
+    private $priority;
     /** @var int */
     private $pre_name;
     /** @var string */
@@ -42,13 +44,15 @@ final class Todo {
     /** @var string */
     private $email;
     /** @var string */
-    private $closedNeg;
-    /** @var int */
+    private $status; 
+    /** @var boolean */
+    private $deleted;    
+    /** @var string */
     private $homepage;
     /** @var string */
-     private $comments;
+     private $comment;
     /** @var string */
-    private $dateAdded;
+    private $createdOn;
     /** @var timestamp */
          
 
@@ -81,22 +85,20 @@ final class Todo {
     /**
      * @return int <i>null</i> if not persistent
      */
-    public function getUid() {
-        return $this->uid;
+    public function getId() {
+        return $this->id;
     }
-
-    public function setId($uid) {
-        if ($this->uid !== null
-                && $this->uid != $uid) {
-            throw new Exception('Cannot change identifier to ' . $uid . ', already set to ' . $this->uid);
+    public function setId($id) {
+        if ($this->id !== null
+                && $this->id != $id) {
+            throw new Exception('Cannot change identifier to ' . $id . ', already set to ' . $this->id);
         }
-        if ($uid === null) {
-            $this->uid = null;
+        if ($id === null) {
+            $this->id = null;
         } else {
-            $this->uid = (int) $uid;
+            $this->id = (int) $id;
         }
     }
-
    
     public function getPreName() {
         return $this->pre_name;
@@ -168,14 +170,6 @@ final class Todo {
     public function setEmail($title) {
         $this->email = $title;
     }
-    
-    public function getClosedNeg() {
-        return $this->closedNeg;
-    }
-
-    public function setClosedNeg($cN) {
-        $this->closedNeg = $cN;
-    }
         
    public function getHomepage() {
         return $this->homepage;
@@ -185,20 +179,44 @@ final class Todo {
         $this->homepage = $hp;
     }
  
-   public function getComments() {
-        return $this->comments;
+   public function getComment() {
+        return $this->comment;
     }
 
-    public function setComments($hp) {
-        $this->comments = $hp;
+    public function setComment($hp) {
+        $this->comment = $hp;
     }   
     
-    public function getDateAdded() {
-        return $this->dateAdded;
+    public function getCreatedOn() {
+        return $this->createdOn;
     }
 
-    public function setDateAdded(DateTime $hp) {
-        $this->dateAdded = $hp;
+    public function setCreatedOn(DateTime $hp) {
+        $this->createdOn = $hp;
     }    
     
+    public function getPriority() {
+        return $this->priority;
+    }
+    public function setPriority($priority) {
+        TodoValidator::validatePriority($priority);
+        $this->priority = (int) $priority;
+    }
+    
+     public function getStatus() {
+        return $this->status;
+    }
+    public function setStatus($status) {
+        TodoValidator::validateStatus($status);
+        $this->status = $status;
+    }
+    
+    public function getDeleted() {
+        return $this->deleted;
+    }
+    public function setDeleted($deleted) {
+        $this->deleted = (bool) $deleted;
+    }
+    
 }
+ 
