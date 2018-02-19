@@ -35,35 +35,54 @@ final class TodoMapper {
      * @param array $properties
      */
     public static function map(Todo $todo, array $properties) {
-        if (array_key_exists('uid', $properties)) {
-            $todo->setId($properties['uid']);
-        }
+        if (array_key_exists('id', $properties)) {
+            $todo->setId($properties['id']);
+        }      
         if (array_key_exists('pre_name', $properties)) {
-            $todo->setPriority($properties['pre_name']);
+            $todo->setPre_name($properties['pre_name']);
         }
-        if (array_key_exists('dateAdded', $properties)) {
-            $createdOn = self::createDateTime($properties['dateAdded']);
-            if ($createdOn) {
-                $todo->setCreatedOn($createdOn);
-            }
-        }
- 
-   
-        
-        
-        
+        if (array_key_exists('name', $properties)) {
+            $todo->setName($properties['pre_name']);
+        }        
         if (array_key_exists('title', $properties)) {
             $todo->setTitle(trim($properties['title']));
         }
-        if (array_key_exists('description', $properties)) {
-            $todo->setDescription(trim($properties['description']));
+        if (array_key_exists('company', $properties)) {
+            $todo->setCompany(trim($properties['company']));
+        }        
+        if (array_key_exists('address', $properties)) {
+            $todo->setAddress(trim($properties['address']));
+        }        
+        if (array_key_exists('zip_city', $properties)) {
+            $todo->setZip_city(trim($properties['zip_city']));
+        }        
+        if (array_key_exists('greeting_line', $properties)) {
+            $todo->setGreeting_line(trim($properties['greting_line']));
         }
+        if (array_key_exists('business', $properties)) {
+            $todo->setBusiness(trim($properties['business']));
+        }
+        if (array_key_exists('email', $properties)) {
+            $todo->setEmail(trim($properties['email']));
+        }        
+        if (array_key_exists('status', $properties)) {
+            $todo->setStatus($properties['status']);
+        }        
+        if (array_key_exists('homepage', $properties)) {
+            $todo->setHomepage($properties['homepage']);
+        }        
+        if (array_key_exists('priority', $properties)) {
+            $todo->setPriority($properties['priority']);
+        }       
         if (array_key_exists('comment', $properties)) {
             $todo->setComment(trim($properties['comment']));
         }
-        if (array_key_exists('status', $properties)) {
-            $todo->setStatus($properties['status']);
-        }
+        if (array_key_exists('created_on', $properties)) {
+            $createdOn = self::createDateTime($properties['created_on']);
+            if ($createdOn) {
+                $todo->setCreatedOn($createdOn);
+            }
+        }   
         if (array_key_exists('deleted', $properties)) {
             $todo->setDeleted($properties['deleted']);
         }

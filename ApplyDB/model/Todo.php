@@ -100,11 +100,11 @@ final class Todo {
         }
     }
    
-    public function getPreName() {
+    public function getPre_name() {
         return $this->pre_name;
     }
 
-    public function setPrename($prename) {
+    public function setPre_name($prename) {
         $this->pre_name = (int) $prename;
     }
 
