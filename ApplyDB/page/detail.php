@@ -9,4 +9,3 @@ use \TodoList\Util\Utils;
 
 // data for template
 $todo = Utils::getTodoByGetId();
-$tooLate = false;

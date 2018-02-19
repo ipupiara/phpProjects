@@ -146,7 +146,7 @@ final class TodoDao {
     private function insert(Todo $todo) {
         $now = new DateTime();
         $todo->setId(null);
-        $todo->setCreatedOn($now);
+        $todo->setDateAdded($now);
         $todo->setStatus(Todo::STATUS_PENDING);
         $sql = '
             INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded,deleted)
@@ -159,10 +159,9 @@ final class TodoDao {
      * @throws Exception
      */
     private function update(Todo $todo) {
-        $todo->setLastModifiedOn(new DateTime());
         $sql = '
             UPDATE applycompanies SET
-                prename = :prename,
+                pre_name = :pre_name,
                 name = :name,
                 title = :title,
                 company = :company,

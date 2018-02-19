@@ -42,7 +42,7 @@ final class TodoMapper {
             $todo->setPre_name($properties['pre_name']);
         }
         if (array_key_exists('name', $properties)) {
-            $todo->setName($properties['pre_name']);
+            $todo->setName($properties['name']);
         }        
         if (array_key_exists('title', $properties)) {
             $todo->setTitle(trim($properties['title']));
