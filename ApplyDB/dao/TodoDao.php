@@ -60,7 +60,7 @@ final class TodoDao {
      * @return Todo Todo or <i>null</i> if not found
      */
     public function findById($id) {
-        $row = $this->query('SELECT * FROM todo WHERE deleted = 0 and id = ' . (int) $id)->fetch();
+        $row = $this->query('SELECT * FROM applycompanies WHERE deleted = 0 and id = ' . (int) $id)->fetch();
         if (!$row) {
             return null;
         }
@@ -88,14 +88,12 @@ final class TodoDao {
      */
     public function delete($id) {
         $sql = '
-            UPDATE todo SET
-                last_modified_on = :last_modified_on,
+            UPDATE applycompanies SET
                 deleted = :deleted
             WHERE
                 id = :id';
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, [
-            ':last_modified_on' => self::formatDateTime(new DateTime()),
             ':deleted' => true,
             ':id' => $id,
         ]);
@@ -119,18 +117,18 @@ final class TodoDao {
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM todo WHERE deleted = 0 ';
-        $orderBy = ' priority, due_on';
+        $sql = 'SELECT * FROM applycompanies WHERE deleted = 0 ';
+        $orderBy = 'priority';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
                 switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
-                        $orderBy = 'due_on, priority';
+                        $orderBy = 'priority';
                         break;
                     case Todo::STATUS_DONE:
                     case Todo::STATUS_VOIDED:
-                        $orderBy = 'due_on DESC, priority';
+                        $orderBy = 'priority';
                         break;
                     default:
                         throw new Exception('No order for status: ' . $search->getStatus());
@@ -149,11 +147,10 @@ final class TodoDao {
         $now = new DateTime();
         $todo->setId(null);
         $todo->setCreatedOn($now);
-        $todo->setLastModifiedOn($now);
         $todo->setStatus(Todo::STATUS_PENDING);
         $sql = '
-            INSERT INTO todo (id, priority, created_on, last_modified_on, due_on, title, description, comment, status, deleted)
-                VALUES (:id, :priority, :created_on, :last_modified_on, :due_on, :title, :description, :comment, :status, :deleted)';
+            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,created_on,deleted)
+                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:created_on,:deleted)';
         return $this->execute($sql, $todo);
     }
 
@@ -164,14 +161,21 @@ final class TodoDao {
     private function update(Todo $todo) {
         $todo->setLastModifiedOn(new DateTime());
         $sql = '
-            UPDATE todo SET
-                priority = :priority,
-                last_modified_on = :last_modified_on,
-                due_on = :due_on,
+            UPDATE applycompanies SET
+                prename = :prename,
+                name = :name,
                 title = :title,
-                description = :description,
-                comment = :comment,
+                company = :company,
+                address = :address,
+                zip_city = :zip_city,
+                greeting_line = :greeting_line,
+                business = :business,
+                email = :email,
                 status = :status,
+                homepage = :homepage,      
+                priority = :priority,
+                comment = :comment,
+                created_on = :created_on,
                 deleted = :deleted
             WHERE
                 id = :id';
@@ -189,7 +193,7 @@ final class TodoDao {
             return $this->findById($this->getDb()->lastInsertId());
         }
         if (!$statement->rowCount()) {
-            throw new NotFoundException('TODO with ID "' . $todo->getId() . '" does not exist.');
+            throw new NotFoundException('applycompany with ID "' . $todo->getId() . '" does not exist.');
         }
         return $todo;
     }
@@ -197,14 +201,20 @@ final class TodoDao {
     private function getParams(Todo $todo) {
         $params = [
             ':id' => $todo->getId(),
-            ':priority' => $todo->getPriority(),
-            ':created_on' => self::formatDateTime($todo->getCreatedOn()),
-            ':last_modified_on' => self::formatDateTime($todo->getLastModifiedOn()),
-            ':due_on' => self::formatDateTime($todo->getDueOn()),
+            ':pre_name' => $todo->getPre_name(),
+            ':name' => $todo->getName(),
             ':title' => $todo->getTitle(),
-            ':description' => $todo->getDescription(),
+            ':company' => $todo->getCompany(),
+            ':address' => $todo->getAddress(),
+            ':zip_city' => $todo->getZip_city(),
+            ':greeting_line' => $todo->getGreeting_line(),
+            ':business' => $todo->getBusiness(),
+            ':email' => $todo->getEmail(),
+            ':status' => $todo->getStatus(),       
+            ':homepage' => $todo->getHomepage(),
+            ':priority' => $todo->getPriority(),
             ':comment' => $todo->getComment(),
-            ':status' => $todo->getStatus(),
+            ':created_on' => self::formatDateTime($todo->getCreatedOn()),
             ':deleted' => self::formatBoolean($todo->getDeleted()),
         ];
         if ($todo->getId()) {
