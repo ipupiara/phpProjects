@@ -57,7 +57,7 @@ final class TodoMapper {
             $todo->setZip_city(trim($properties['zip_city']));
         }        
         if (array_key_exists('greeting_line', $properties)) {
-            $todo->setGreeting_line(trim($properties['greting_line']));
+            $todo->setGreeting_line(trim($properties['greeting_line']));
         }
         if (array_key_exists('business', $properties)) {
             $todo->setBusiness(trim($properties['business']));
@@ -77,10 +77,10 @@ final class TodoMapper {
         if (array_key_exists('comment', $properties)) {
             $todo->setComment(trim($properties['comment']));
         }
-        if (array_key_exists('created_on', $properties)) {
-            $createdOn = self::createDateTime($properties['created_on']);
-            if ($createdOn) {
-                $todo->setCreatedOn($createdOn);
+        if (array_key_exists('dateAdded', $properties)) {
+            $dateAdded = self::createDateTime($properties['dateAdded']);
+            if ($dateAdded) {
+                $todo->setDateAdded($dateAdded);
             }
         }   
         if (array_key_exists('deleted', $properties)) {

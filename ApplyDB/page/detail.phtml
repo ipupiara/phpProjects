@@ -18,7 +18,7 @@ use \TodoList\Util\Utils;
     <?php if ($tooLate): ?>
         <i class="material-icons error" title="Should be already done!">error</i>
     <?php endif; ?>
-    <?php echo Utils::escape($todo->getTitle()); ?>
+    <?php echo Utils::escape($todo->getCompany()); ?>
 </h1>
 
 <table class="detail">
@@ -29,22 +29,6 @@ use \TodoList\Util\Utils;
     <tr>
         <th>Created On</th>
         <td><?php echo Utils::escape(Utils::formatDateTime($todo->getCreatedOn())); ?></td>
-    </tr>
-    <tr>
-        <th>Due On</th>
-        <td>
-            <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
-            <?php echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
-            <?php if ($tooLate): ?></span><?php endif; ?>
-        </td>
-    </tr>
-    <tr>
-        <th>Last Modified On</th>
-        <td><?php echo Utils::escape(Utils::formatDateTime($todo->getLastModifiedOn())); ?></td>
-    </tr>
-    <tr>
-        <th>Description</th>
-        <td><?php echo Utils::escape($todo->getDescription()); ?></td>
     </tr>
     <tr>
         <th>Comment</th>

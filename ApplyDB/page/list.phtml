@@ -25,26 +25,15 @@ use \TodoList\Util\Utils;
 <?php else: ?>
     <ul class="list">
         <?php foreach ($todos as $todo): ?>
-            <?php /* @var $todo Todo */ ?>
-            <?php $tooLate = $status == Todo::STATUS_PENDING
-                    && $todo->getDueOn() < new DateTime(); ?>
             <li>
                 <h3>
-                    <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getTitle()); ?></a>
+                    <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
                     <?php echo Utils::iconPriority($todo->getPriority()); ?>
-                    <?php if ($tooLate): ?>
-                        <i class="material-icons error" title="Should be already done!">error</i>
-                    <?php endif; ?>
                 </h3>
-                <?php if ($todo->getDescription()): ?>
-                    <p class="description"><?php echo Utils::escape($todo->getDescription()); ?></p>
+                <?php if ($todo->getBusiness()): ?>
+                    <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
                 <?php endif; ?>
-                <p><span class="label">Created On:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getCreatedOn())); ?></p>
-                <p><span class="label">Due On:</span>
-                    <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
-                    <?php echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
-                    <?php if ($tooLate): ?></span><?php endif; ?>
-                </p>
+                <p><span class="label">date added:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></p>
             </li>
         <?php endforeach; ?>
     </ul>

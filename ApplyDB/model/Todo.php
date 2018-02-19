@@ -52,7 +52,7 @@ final class Todo {
     /** @var string */
      private $comment;
     /** @var string */
-    private $createdOn;
+    private $dateAdded;
     /** @var timestamp */
          
 
@@ -187,12 +187,12 @@ final class Todo {
         $this->comment = $hp;
     }   
     
-    public function getCreatedOn() {
-        return $this->createdOn;
+    public function getDateAdded() {
+        return $this->dateAdded;
     }
 
-    public function setCreatedOn(DateTime $hp) {
-        $this->createdOn = $hp;
+    public function setDateAdded(DateTime $hp) {
+        $this->dateAdded = $hp;
     }    
     
     public function getPriority() {

@@ -149,8 +149,8 @@ final class TodoDao {
         $todo->setCreatedOn($now);
         $todo->setStatus(Todo::STATUS_PENDING);
         $sql = '
-            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,created_on,deleted)
-                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:created_on,:deleted)';
+            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded,deleted)
+                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:dateAdded,:deleted)';
         return $this->execute($sql, $todo);
     }
 
@@ -175,7 +175,7 @@ final class TodoDao {
                 homepage = :homepage,      
                 priority = :priority,
                 comment = :comment,
-                created_on = :created_on,
+                dateAdded = :dateAdded,
                 deleted = :deleted
             WHERE
                 id = :id';
@@ -214,7 +214,7 @@ final class TodoDao {
             ':homepage' => $todo->getHomepage(),
             ':priority' => $todo->getPriority(),
             ':comment' => $todo->getComment(),
-            ':created_on' => self::formatDateTime($todo->getCreatedOn()),
+            ':dateAdded' => self::formatDateTime($todo->getDateAdded()),
             ':deleted' => self::formatBoolean($todo->getDeleted()),
         ];
         if ($todo->getId()) {

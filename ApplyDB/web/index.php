@@ -44,7 +44,7 @@ final class Index {
             
         } else {
             $_SESSION['credentialsValid'] = false;
-            $_SESSION['username']="user";
+            $_SESSION['username']="test";
             $_SESSION['password']="";
         }
     }
