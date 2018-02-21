@@ -22,8 +22,8 @@ final class TodoValidator {
      */
     public static function validate(Todo $todo) {
         $errors = [];
-        if (!$todo->getCreatedOn()) {
-            $errors[] = new \TodoList\Validation\ValidationError('createdOn', 'Empty or invalid Created On.');
+        if (!$todo->getDateAdded()) {
+            $errors[] = new \TodoList\Validation\ValidationError('dateAdded', 'Empty or invalid date added.');
         }
         if (!trim($todo->getPriority())) {
             $errors[] = new \TodoList\Validation\ValidationError('priority', 'Priority cannot be empty.');

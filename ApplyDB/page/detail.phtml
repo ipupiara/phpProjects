@@ -16,9 +16,14 @@ use \TodoList\Util\Utils;
 
 <table class="detail">
     <tr>       
-        <th>Priority</th>
+        <th>Company</th>
         <td><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); echo Utils::iconPriority($todo->getPriority()); ?></td>
     </tr>
+    <tr>
+        <th>Business</th>
+        <td><?php echo Utils::escape($todo->getBusiness()); ?></td>
+    </tr>
+
     <tr>
         <th>Created On</th>
         <td><?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></td>
@@ -71,7 +76,7 @@ use \TodoList\Util\Utils;
         <fieldset>
             <div class="field">
                 <label>Comment:</label>
-                <textarea name="comment" cols="1" rows="1"></textarea>
+                <textarea name="comment" cols="3" rows="2"><?php echo Utils::escape($todo->getComment()); ?></textarea>
             </div>
         </fieldset>
     </form>

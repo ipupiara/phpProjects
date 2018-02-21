@@ -51,34 +51,51 @@ function error_field($title, array $errors) {
              <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>"
                    class="text<?php echo error_field('title', $errors); ?>"/>
         </div>
+
         <div class="field">
-            <label>Due On:</label>
-            <input type="text" name="todo[due_on_date]" value="<?php echo Utils::escape($todo->getDueOn()->format('Y-n-j')); ?>"
-                   class="text datepicker<?php echo error_field('due_on', $errors); ?>" />
-            &nbsp;
-            <select name="todo[due_on_hour]">
-            <?php for ($i = 0; $i < 24; ++$i): ?>
-                <?php $hour = str_pad($i, 2, '0', STR_PAD_LEFT); ?>
-                <option value="<?php echo $hour; ?>"
-                        <?php if ($todo->getDueOn()
-                                && $hour == $todo->getDueOn()->format('H')): ?>
-                            selected="selected"
-                        <?php endif; ?>
-                        ><?php echo $hour; ?></option>
-            <?php endfor; ?>
-            </select>
-            :
-            <select name="todo[due_on_minute]">
-            <?php for ($i = 0; $i < 60; $i = $i + 15): ?>
-                <?php $minute = str_pad($i, 2, '0', STR_PAD_LEFT); ?>
-                <option value="<?php echo $minute; ?>"
-                        <?php if ($todo->getDueOn()
-                                && $minute == $todo->getDueOn()->format('i')): ?>
-                            selected="selected"
-                        <?php endif; ?>
-                        ><?php echo $minute; ?></option>
-            <?php endfor; ?>
-            </select>
+        <label>Prename:</label>
+            <input type="text" name="todo[pre_name]" value="<?php echo Utils::escape($todo->getPre_name()); ?>"
+                   class="text<?php echo error_field('pre_name', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Name:</label>
+            <input type="text" name="todo[name]" value="<?php echo Utils::escape($todo->getName()); ?>"
+                   class="text<?php echo error_field('name', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Company:</label>
+            <input type="text" name="todo[company]" value="<?php echo Utils::escape($todo->getCompany()); ?>"
+                   class="text<?php echo error_field('company', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Address:</label>
+            <input type="text" name="todo[address]" value="<?php echo Utils::escape($todo->getAddress()); ?>"
+                   class="text<?php echo error_field('address', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Zip city:</label>
+            <input type="text" name="todo[zip_city]" value="<?php echo Utils::escape($todo->getZip_city()); ?>"
+                   class="text<?php echo error_field('zip_city', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Greetingline:</label>
+            <input type="text" name="todo[greeting_line]" value="<?php echo Utils::escape($todo->getGreeting_line()); ?>"
+                   class="text<?php echo error_field('greeting_line', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Emailaddress:</label>
+            <input type="text" name="todo[email]" value="<?php echo Utils::escape($todo->getEmail()); ?>"
+                   class="text<?php echo error_field('email', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Homepage:</label>
+            <input type="text" name="todo[homepage]" value="<?php echo Utils::escape($todo->getHomepage()); ?>"
+                   class="text<?php echo error_field('homepage', $errors); ?>"/>
+        </div>          
+        <div class="field">
+        <label>Business:</label>
+            <textarea name="todo[business]" cols="1" rows="1"
+                      class="<?php echo error_field('business', $errors); ?>"><?php echo Utils::escape($todo->getBusiness()); ?></textarea>
         </div>
         <div class="field">
             <label>Priority:</label>
@@ -93,12 +110,7 @@ function error_field($title, array $errors) {
             </select>
         </div>
         <div class="field">
-            <label>Description:</label>
-            <textarea name="todo[description]" cols="1" rows="1"
-                      class="<?php echo error_field('description', $errors); ?>"><?php echo Utils::escape($todo->getDescription()); ?></textarea>
-        </div>
-        <div class="field">
-            <label>Comment:</label>
+        <label>Comment:</label>
             <textarea name="todo[comment]" cols="1" rows="1"
                       class="<?php echo error_field('comment', $errors); ?>"><?php echo Utils::escape($todo->getComment()); ?></textarea>
         </div>
