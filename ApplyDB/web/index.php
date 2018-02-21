@@ -98,22 +98,26 @@ final class Index {
          * else allow the user-desired page to be loaded
          *          
          */
-        if (array_key_exists('username', $_POST)) {
-            $uname = $_POST['username'];
-            $pwd = $_POST['password'];
-            $_SESSION['username'] = $uname;
-            if (TodoDao::credentialsValid($uname,$pwd)) {
-                $_SESSION['password'] = $pwd;
-                $_SESSION['credentialsValid'] = true;
-            } else {
-                $_SESSION['password'] = "";
-                $_SESSION['credentialsValid'] = false;    
-                Flash::addFlash("credentials not valid");
+        if (array_key_exists('page', $_GET) && ($_GET['page'] == "homeLogout")) {
+                 $_SESSION['password'] = "";   
+        } else {
+            if (array_key_exists('username', $_POST)) {
+                $uname = $_POST['username'];
+                $pwd = $_POST['password'];
+                $_SESSION['username'] = $uname;
+                if (TodoDao::credentialsValid($uname,$pwd)) {
+                    $_SESSION['password'] = $pwd;
+                    $_SESSION['credentialsValid'] = true;
+                } else {
+                    $_SESSION['password'] = "";
+                    $_SESSION['credentialsValid'] = false;    
+                    Flash::addFlash("credentials not valid");
+                }
             }
-        }
-        if ($_SESSION['credentialsValid']) {
-            if (array_key_exists('page', $_GET)) {
-                 $page = $_GET['page'];
+            if ($_SESSION['credentialsValid']) {
+                if (array_key_exists('page', $_GET)) {
+                     $page = $_GET['page'];
+                }
             }
         }
         return $this->checkPage($page);

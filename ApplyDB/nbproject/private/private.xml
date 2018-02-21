@@ -5,8 +5,6 @@
         <group>
             <file>file:/D:/projects/phpProjects/ApplyDB/web/index.php</file>
             <file>file:/D:/projects/phpProjects/ApplyDB/layout/index.phtml</file>
-            <file>file:/D:/projects/phpProjects/ApplyDB/config/Config.php</file>
-            <file>file:/D:/projects/phpProjects/ApplyDB/dao/TodoDao.php</file>
         </group>
     </open-files>
 </project-private>

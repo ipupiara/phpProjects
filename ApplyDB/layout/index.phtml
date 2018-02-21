@@ -63,7 +63,9 @@ use \TodoList\Util\Utils;
                                              ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
                                 <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"
                                              ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>
-                              
+                                <?php if ( $_SESSION['credentialsValid']): ?>             
+                                    <li><span><a href="<?php echo Utils::createLink('homeLogout'); ?>">Logout</a></span></li>
+                                <?php endif; ?>    
                             </ul>
                         </div>
                     </div>
