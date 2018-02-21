@@ -28,7 +28,7 @@ function error_field($title, array $errors) {
 
 <h1>
     <?php if ($edit): ?>
-        <?php echo Utils::escape($todo->getTitle()); ?>
+        <?php echo Utils::escape($todo->getCompany()); ?>
     <?php else: ?>
         <i class="material-icons new">insert_invitation</i>
         Add new TODO
@@ -116,7 +116,7 @@ function error_field($title, array $errors) {
         </div>
         <div class="wrapper">
             <input type="submit" name="cancel" value="CANCEL" class="submit" />
-            <input type="submit" name="save" value="<?php echo $edit ? 'EDIT' : 'ADD'; ?>" class="submit" />
+            <input type="submit" name="save" value="<?php echo $edit ? 'SAVE' : 'ADD'; ?>" class="submit" />
         </div>
     </fieldset>
 </form>
