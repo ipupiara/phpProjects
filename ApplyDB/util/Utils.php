@@ -147,7 +147,7 @@ final class Utils {
      * @return string escaped string
      */
     public static function escape($string) {
-        return htmlspecialchars($string, ENT_QUOTES);
+        return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE);
     }
 
 }

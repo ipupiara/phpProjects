@@ -15,9 +15,9 @@ use \TodoList\Util\Utils;
 ?>
 
 <table class="detail">
-    <tr>
+    <tr>       
         <th>Priority</th>
-        <td><?php echo Utils::iconPriority($todo->getPriority()); ?></td>
+        <td><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); echo Utils::iconPriority($todo->getPriority()); ?></td>
     </tr>
     <tr>
         <th>Created On</th>
