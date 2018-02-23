@@ -174,11 +174,15 @@ final class TodoDao {
                 homepage = :homepage,      
                 priority = :priority,
                 comment = :comment,
-                dateAdded = :dateAdded,
+               
                 deleted = :deleted
             WHERE
                 id = :id';
         return $this->execute($sql, $todo);
+       
+//               dateAdded = :dateAdded,    this line had to be cut out in above empty line
+//              either never change this and then dont take it into the update statement, or allow change and then add into so called (php-)"array"                
+//                 but adding it in the statement but not in the array will cause an error or at least a warning        
     }
 
     /**
@@ -218,7 +222,7 @@ final class TodoDao {
         ];
         if ($todo->getId()) {
             // unset created date, this one is never updated
-            unset($params[':created_on']);
+            unset($params[':dateAdded']);
         }
         return $params;
     }
