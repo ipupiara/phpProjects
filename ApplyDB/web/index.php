@@ -100,6 +100,7 @@ final class Index {
          */
         if (array_key_exists('page', $_GET) && ($_GET['page'] == "homeLogout")) {
                  $_SESSION['password'] = "";   
+                 $_SESSION['credentialsValid'] = false;  
         } else {
             if (array_key_exists('username', $_POST)) {
                 $uname = $_POST['username'];

@@ -58,6 +58,7 @@ use \TodoList\Util\Utils;
             <div class="actions">
                 <a href="<?php echo Utils::createLink('add-edit', ['id' => $todo->getId()]); ?>" title="Edit it."><i class="material-icons multi">edit</i></a>
                 <a href="<?php echo Utils::createLink('delete', ['id' => $todo->getId()]); ?>" id="delete-link" title="Delete it."><i class="material-icons multi">delete</i></a>
+                <a href="<?php echo Utils::createLink('getcsv', ['id' => $todo->getId()]); ?>" title="Download it as CSV-file"><i class="material-icons multi">arrow_downward</i></a>
             </div>
         </td>
     </tr>
