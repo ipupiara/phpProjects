@@ -18,3 +18,4 @@ $search = (new TodoSearchCriteria())
 // data for template
 $title = Utils::capitalize($status) . ' TODOs';
 $todos = $dao->find($search);
+$amtTodos = count($todos);

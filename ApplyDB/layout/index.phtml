@@ -61,8 +61,10 @@ use \TodoList\Util\Utils;
                                              ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
                                 <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies"
                                              ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
-                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"
+                                <li><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"
                                              ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>
+                                <li class="last"><span><a href="<?php echo Utils::createLink('undelete'); ?>" title="Undelete Company"
+                                             ><i class="material-icons new">delete</i>Undelete Company</a></span></li>
                                 <?php if ( $_SESSION['credentialsValid']): ?>             
                                     <li><span><a href="<?php echo Utils::createLink('homeLogout'); ?>">Logout</a></span></li>
                                 <?php endif; ?>    

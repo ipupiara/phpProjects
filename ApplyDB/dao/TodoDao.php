@@ -129,11 +129,11 @@ final class TodoDao {
 
     private function getFindSql(TodoSearchCriteria $search = null) {
         $sql = 'SELECT * FROM applycompanies WHERE deleted = 0 ';
-        $orderBy = 'priority';
+        $orderBy = 'dateAdded desc';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
-                switch ($search->getStatus()) {
+/*                switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
                         $orderBy = 'priority';
                         break;
@@ -143,8 +143,8 @@ final class TodoDao {
                         break;
                     default:
                         throw new Exception('No order for status: ' . $search->getStatus());
-                }
-            }
+                }  */
+            }  
         }
         $sql .= ' ORDER BY ' . $orderBy;
         return $sql;
