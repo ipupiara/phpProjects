@@ -40,6 +40,17 @@ final class TodoDao {
         }
         return $result;
     }
+    
+    private static function todoNeedsInsert(Todo $todo)
+    {
+        $res = false;
+        if ($todo->getId() === null) { 
+            $res = true; 
+        } else {
+            $res = false;
+        }
+        return $res;
+    }
 
     /**
      * Find all {@link Todo}s by search criteria.
@@ -75,7 +86,7 @@ final class TodoDao {
      * @return Todo saved {@link Todo} instance
      */
     public function save(Todo $todo) {
-        if ($todo->getId() === null) {
+        if (TodoDao::todoNeedsInsert($todo)) {
             return $this->insert($todo);
         }
         return $this->update($todo);
@@ -180,7 +191,7 @@ final class TodoDao {
                 id = :id';
         return $this->execute($sql, $todo);
        
-//               dateAdded = :dateAdded,    this line had to be cut out in above empty line
+//               dateAdded = :dateAdded,  PN, 23. feb 2018:  this line had to be cut out in above empty line
 //              either never change this and then dont take it into the update statement, or allow change and then add into so called (php-)"array"                
 //                 but adding it in the statement but not in the array will cause an error or at least a warning        
     }
@@ -192,7 +203,7 @@ final class TodoDao {
     private function execute($sql, Todo $todo) {
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, $this->getParams($todo));
-        if (!$todo->getId()) {
+        if (TodoDao::todoNeedsInsert($todo)) {
             return $this->findById($this->getDb()->lastInsertId());
         }
         if (!$statement->rowCount()) {
@@ -220,7 +231,7 @@ final class TodoDao {
             ':dateAdded' => self::formatDateTime($todo->getDateAdded()),
             ':deleted' => self::formatBoolean($todo->getDeleted()),
         ];
-        if ($todo->getId()) {
+        if (!TodoDao::todoNeedsInsert($todo)) {
             // unset created date, this one is never updated
             unset($params[':dateAdded']);
         }

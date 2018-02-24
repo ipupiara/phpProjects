@@ -87,6 +87,40 @@ final class TodoMapper {
             $todo->setDeleted($properties['deleted']);
         }
     }
+    
+    public static function phpArrayFromTodo (Todo $todo)
+    {
+        /*
+        $res = [
+            'id' => $todo->getId(),
+            'pre_name' => $todo->getPre_name(),
+            'name' => $todo->getName(),
+            'title' => $todo->getTitle(),
+            'company' => $todo->getCompany(),
+            'address' => $todo->getAddress(),
+            'zip_city' => $todo->getZip_city(),
+            'greeting_line' => $todo->getGreeting_line(),
+            'business' => $todo->getBusiness(),
+            'email' => $todo->getEmail(),
+            'status' => $todo->getStatus(),       
+            'homepage' => $todo->getHomepage(),
+            'priority' => $todo->getPriority(),
+            'comment' => $todo->getComment(),
+            'dateAdded' => self::formatDateTime($todo->getDateAdded()),
+            'deleted' => self::formatBoolean($todo->getDeleted()),
+        ];     
+         * 
+         */
+            
+        $res = array(
+            array(  'id','pre_name','name','title','company','address','zip_city','greeting_line',
+                    'business','email','status','homepage','priority','comment', 'dateAdded','deleted'),
+            array($todo->getId(),$todo->getPre_name(), $todo->getName(),$todo->getTitle(), $todo->getCompany(), $todo->getAddress(),
+                $todo->getZip_city(), $todo->getGreeting_line(), $todo->getBusiness(), $todo->getEmail(), $todo->getStatus(),  
+                $todo->getHomepage(), $todo->getPriority(), $todo->getComment(), self::formatDateTime($todo->getDateAdded()), self::formatBoolean($todo->getDeleted()))
+        );
+        return res;
+    }
 
     private static function createDateTime($input) {
         return DateTime::createFromFormat('Y-n-j H:i:s', $input);
