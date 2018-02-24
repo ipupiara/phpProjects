@@ -5,6 +5,7 @@ namespace TodoList\Mapping;
 
 use \DateTime;
 use \TodoList\Model\Todo;
+use \TodoList\Dao\TodoDao;
 
 /**
  * Mapper for {@link \TodoList\Model\Todo} from array.
@@ -117,9 +118,9 @@ final class TodoMapper {
                     'business','email','status','homepage','priority','comment', 'dateAdded','deleted'),
             array($todo->getId(),$todo->getPre_name(), $todo->getName(),$todo->getTitle(), $todo->getCompany(), $todo->getAddress(),
                 $todo->getZip_city(), $todo->getGreeting_line(), $todo->getBusiness(), $todo->getEmail(), $todo->getStatus(),  
-                $todo->getHomepage(), $todo->getPriority(), $todo->getComment(), self::formatDateTime($todo->getDateAdded()), self::formatBoolean($todo->getDeleted()))
+                $todo->getHomepage(), $todo->getPriority(), $todo->getComment(), TodoDao::formatDateTime($todo->getDateAdded()), TodoDao::formatBoolean($todo->getDeleted()))
         );
-        return res;
+        return $res;
     }
 
     private static function createDateTime($input) {

@@ -262,11 +262,11 @@ final class TodoDao {
         throw new Exception('DB error [' . $errorInfo[0] . ', ' . $errorInfo[1] . ']: ' . $errorInfo[2]);
     }
 
-    private static function formatDateTime(DateTime $date) {
+    public static function formatDateTime(DateTime $date) {
         return $date->format('Y-m-d H:i:s');
     }
 
-    private static function formatBoolean($bool) {
+    public static function formatBoolean($bool) {
         return $bool ? 1 : 0;
     }
 
