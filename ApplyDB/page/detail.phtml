@@ -25,7 +25,7 @@ use \TodoList\Util\Utils;
     </tr>
 
     <tr>
-        <th>Created On</th>
+        <th>date added</th>
         <td><?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></td>
     </tr>
     <tr>
@@ -57,7 +57,6 @@ use \TodoList\Util\Utils;
             </div>
             <div class="actions">
                 <a href="<?php echo Utils::createLink('add-edit', ['id' => $todo->getId()]); ?>" title="Edit it."><i class="material-icons multi">edit</i></a>
-                <a href="<?php echo Utils::createLink('delete', ['id' => $todo->getId()]); ?>" id="delete-link" title="Delete it."><i class="material-icons multi">delete</i></a>
                 <a href="<?php echo Utils::createLink('getcsv', ['id' => $todo->getId()]); ?>" title="Download it as CSV-file"><i class="material-icons multi">arrow_downward</i></a>
             </div>
         </td>
@@ -69,16 +68,3 @@ use \TodoList\Util\Utils;
        ><i class="material-icons">fast_rewind</i>To the list</a>
 </p>
 
-<div id="delete-dialog" title="Delete this TODO?">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This TODO will be deleted. Are you sure?</p>
-</div>
-<div id="change-status-dialog">
-    <form id="change-status-form" method="post">
-        <fieldset>
-            <div class="field">
-                <label>Comment:</label>
-                <textarea name="comment" cols="3" rows="2"><?php echo Utils::escape($todo->getComment()); ?></textarea>
-            </div>
-        </fieldset>
-    </form>
-</div>

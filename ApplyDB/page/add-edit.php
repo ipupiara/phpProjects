@@ -17,18 +17,9 @@ $edit = array_key_exists('id', $_GET);
 if ($edit) {
     $todo = Utils::getTodoByGetId();
 } else {
-    // set defaults
+    // set defaults / PN 25. feb 2018 but in constructor and never in UI code  (rules of OO-development!)
+    // to avoid any redundancy  
     $todo = new Todo();
-    $todo->setPriority(Todo::PRIORITY_MEDIUM);
-    $todo->setStatus(Todo::STATUS_PENDING);
-    $todo->setDeleted(false);
-/*    
- * $dueOn = new DateTime("+1 day");
-    $dueOn->setTime(0, 0, 0);
-    $todo->setDueOn($dueOn);
- * 
- */
- 
 }
 
 if (array_key_exists('cancel', $_POST)) {
@@ -49,16 +40,7 @@ if (array_key_exists('cancel', $_POST)) {
         'business' => $_POST['todo']['business'],
         'priority' => $_POST['todo']['priority'],
         'comment' => $_POST['todo']['comment'],
-        
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
-        'title' => $_POST['todo']['title'],
+        'dateAdded' => $_POST['todo']['dateAdded_date'] . ' ' . $_POST['todo']['dateAdded_hour'] . ':' . $_POST['todo']['dateAdded_minute'] . ':00',
     ];
         ;
     // map

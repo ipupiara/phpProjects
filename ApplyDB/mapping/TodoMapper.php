@@ -84,9 +84,6 @@ final class TodoMapper {
                 $todo->setDateAdded($dateAdded);
             }
         }   
-        if (array_key_exists('deleted', $properties)) {
-            $todo->setDeleted($properties['deleted']);
-        }
     }
     
     public static function phpArrayFromTodo (Todo $todo)
@@ -115,11 +112,11 @@ final class TodoMapper {
             
         $res = array(
             array(  'id','pre_name','name','title','company','address','zip_city','greeting_line',
-                    'business','email','status','homepage','priority','comment', 'dateAdded','deleted'),
+                     'business','email','status','homepage','priority','comment', 'dateAdded'),
             array($todo->getId(),$todo->getPre_name(), $todo->getName(),$todo->getTitle(), $todo->getCompany(), $todo->getAddress(),
                 $todo->getZip_city(), $todo->getGreeting_line(), $todo->getBusiness(), $todo->getEmail(), $todo->getStatus(),  
-                $todo->getHomepage(), $todo->getPriority(), $todo->getComment(), TodoDao::formatDateTime($todo->getDateAdded()), TodoDao::formatBoolean($todo->getDeleted()))
-        );
+                $todo->getHomepage(), $todo->getPriority(), $todo->getComment(), TodoDao::formatDateTime($todo->getDateAdded()))
+         );
         return $res;
     }
 

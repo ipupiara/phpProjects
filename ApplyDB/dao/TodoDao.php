@@ -71,7 +71,7 @@ final class TodoDao {
      * @return Todo Todo or <i>null</i> if not found
      */
     public function findById($id) {
-        $row = $this->query('SELECT * FROM applycompanies WHERE deleted = 0 and id = ' . (int) $id)->fetch();
+        $row = $this->query('SELECT * FROM applycompanies WHERE id = ' . (int) $id)->fetch();
         if (!$row) {
             return null;
         }
@@ -93,25 +93,6 @@ final class TodoDao {
     }
 
     /**
-     * Delete {@link Todo} by identifier.
-     * @param int $id {@link Todo} identifier
-     * @return bool <i>true</i> on success, <i>false</i> otherwise
-     */
-    public function delete($id) {
-        $sql = '
-            UPDATE applycompanies SET
-                deleted = :deleted
-            WHERE
-                id = :id';
-        $statement = $this->getDb()->prepare($sql);
-        $this->executeStatement($statement, [
-            ':deleted' => true,
-            ':id' => $id,
-        ]);
-        return $statement->rowCount() == 1;
-    }
-
-    /**
      * @return PDO
      */
     private function getDb() {
@@ -128,11 +109,11 @@ final class TodoDao {
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM applycompanies WHERE deleted = 0 ';
+        $sql = 'SELECT * FROM applycompanies ';
         $orderBy = 'dateAdded desc';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
-                $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
+                $sql .= ' where status = ' . $this->getDb()->quote($search->getStatus());
 /*                switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
                         $orderBy = 'priority';
@@ -159,9 +140,10 @@ final class TodoDao {
         $todo->setId(null);
         $todo->setDateAdded($now);
         $todo->setStatus(Todo::STATUS_PENDING);
-        $sql = '
-            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded,deleted)
-                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:dateAdded,:deleted)';
+          $sql = '
+            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded)
+                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:dateAdded)';
+ 
         return $this->execute($sql, $todo);
     }
 
@@ -185,15 +167,10 @@ final class TodoDao {
                 homepage = :homepage,      
                 priority = :priority,
                 comment = :comment,
-               
-                deleted = :deleted
+                dateAdded = :dateAdded
             WHERE
                 id = :id';
         return $this->execute($sql, $todo);
-       
-//               dateAdded = :dateAdded,  PN, 23. feb 2018:  this line had to be cut out in above empty line
-//              either never change this and then dont take it into the update statement, or allow change and then add into so called (php-)"array"                
-//                 but adding it in the statement but not in the array will cause an error or at least a warning        
     }
 
     /**
@@ -205,8 +182,10 @@ final class TodoDao {
         $this->executeStatement($statement, $this->getParams($todo));
         if (TodoDao::todoNeedsInsert($todo)) {
             return $this->findById($this->getDb()->lastInsertId());
-        }
-        if (!$statement->rowCount()) {
+        }   
+//        if (!$statement->rowCount()) 
+//                PN 16 feb 1018: above rowCount obviousely does not work all times (maybe would need to set a param on mysql ...?)
+        if (!$this->findById($todo->getId())) {
             throw new NotFoundException('applycompany with ID "' . $todo->getId() . '" does not exist.');
         }
         return $todo;
@@ -229,12 +208,7 @@ final class TodoDao {
             ':priority' => $todo->getPriority(),
             ':comment' => $todo->getComment(),
             ':dateAdded' => self::formatDateTime($todo->getDateAdded()),
-            ':deleted' => self::formatBoolean($todo->getDeleted()),
         ];
-        if (!TodoDao::todoNeedsInsert($todo)) {
-            // unset created date, this one is never updated
-            unset($params[':dateAdded']);
-        }
         return $params;
     }
 

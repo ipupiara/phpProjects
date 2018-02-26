@@ -45,8 +45,6 @@ final class Todo {
     private $email;
     /** @var string */
     private $status; 
-    /** @var boolean */
-    private $deleted;    
     /** @var string */
     private $homepage;
     /** @var string */
@@ -62,6 +60,10 @@ final class Todo {
     public function __construct() {
         $now = new DateTime();
         $this->setDateAdded($now);
+        $this->setPriority(Todo::PRIORITY_MEDIUM);
+        $this->setStatus(Todo::STATUS_PENDING);
+
+ 
     }
 
     public static function allStatuses() {
@@ -210,13 +212,5 @@ final class Todo {
         TodoValidator::validateStatus($status);
         $this->status = $status;
     }
-    
-    public function getDeleted() {
-        return $this->deleted;
-    }
-    public function setDeleted($deleted) {
-        $this->deleted = (bool) $deleted;
-    }
-    
 }
  
