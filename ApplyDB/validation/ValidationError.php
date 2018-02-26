@@ -10,6 +10,7 @@ final class ValidationError {
 
     private $source;
     private $message;
+    private $ignorable;
 
 
     /**
@@ -17,9 +18,10 @@ final class ValidationError {
      * @param mixed $source source of the error
      * @param string $message error message
      */
-    function __construct($source, $message) {
+    function __construct($source, $message, $ignore = false) {
         $this->source = $source;
         $this->message = $message;
+        $this->ignorable = $ignore;
     }
 
     /**
@@ -36,6 +38,10 @@ final class ValidationError {
      */
     public function getMessage() {
         return $this->message;
+    }
+    
+    public function getIgnorable() {
+        return $this->ignorable;
     }
 
 }

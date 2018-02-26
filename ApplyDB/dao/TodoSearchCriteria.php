@@ -29,14 +29,14 @@ final class TodoSearchCriteria {
         return $this;
     }
 
-    public function getCNamePart() {
+    public function getCompanyNamePart() {
         return $this->cNamePart;
     }
 
     /**
      * @return this
      */
-    public function setCNamePart($compName) {
+    public function setCompanyNamePart($compName) {
         $this->cNamePart = $compName;
         return $this;
     }

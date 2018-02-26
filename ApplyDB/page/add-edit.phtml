@@ -23,6 +23,15 @@ function error_field($title, array $errors) {
     return '';
 }
 
+function insertPromptForIgnorableError($title, array $errors)
+    $res = ''; 
+    foreach ($errors as $error) {
+        /* @var $error ValidationError */
+        if (($error->getSource() == $title) && ($error->getIgnorable())) {
+            $res = 'Ignore <input type=checkbox name = '.$error->getSource().'IgnoreCheckbox >'; 
+        }
+    }
+    return $res;
 /* @var $todo Todo */
 ?>
 
@@ -66,6 +75,7 @@ function error_field($title, array $errors) {
             <label>Company:</label>
             <input type="text" name="todo[company]" value="<?php echo Utils::escape($todo->getCompany()); ?>"
                    class="text<?php echo error_field('company', $errors); ?>"/>
+            <?php echo  insertPromptForIgnorableError('company', array $errors) ?>
         </div>
         <div class="field">
             <label>Address:</label>

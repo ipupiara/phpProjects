@@ -48,11 +48,11 @@ final class TodoDao {
         try {
             $dao = new TodoDao();
             $sCrit = new TodoSearchCriteria();
-            $search = $sCrit->setCNamePart($cName);
+            $search = $sCrit->setCompanyNamePart($cName);
             $todos = $dao->find($search);
             $amtTodos = count($todos);
             if ($amtTodos > $amt) {
-                $result = false;
+                $result = true;
             }
         } catch (Exception $ex) {
  //           throw new Exception('DB connection error: ' . $ex->getMessage());
@@ -132,21 +132,23 @@ final class TodoDao {
         $res = '';
         if ($first) {
             $res.=' where ';                    
-            $first = false;
+//            $first = false;    there are no ref parameters but value given on stack as copy, at least for booleans
+            // so first must be set by the caller   :-(
         } else  {
             $res.=' and ';
         }
-        return res;
+        return $res;
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
         $first = true;
         $sql = 'SELECT * FROM applycompanies ';
-        $orderBy = 'dateAdded desc';
         if ($search !== null) {
             if ($search->getStatus() !== null) {   
                 $condPrefix = TodoDao::conditionLinkPrefix($first);
+                $first = false;
                 $sql .= $condPrefix. ' status = ' . $this->getDb()->quote($search->getStatus());
+                $orderBy = 'dateAdded desc';
 /*                switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
                         $orderBy = 'priority';
@@ -159,19 +161,17 @@ final class TodoDao {
                         throw new Exception('No order for status: ' . $search->getStatus());
                 }  */
             }
-            if ($search->getCNamePart() !== null) {
-                if ($first) {
-                    $sql.=' where ';                    
-                    $first = false;
-                } else  {
-                    $sql.=' and ';
-                }
+            if ($search->getCompanyNamePart() !== null) {
                 $condPrefix = TodoDao::conditionLinkPrefix($first);
-                $stringToMatch =  $condPrefix. $this->getDb()->quote('%'.$search->getCNamePart().'%');
-                $sql .= ' company like ' . $stringToMatch;
+                $first = false;
+                $stringToMatch =  $this->getDb()->quote('%'.$search->getCompanyNamePart().'%');
+                $sql .= $condPrefix.' company like ' . $stringToMatch;
+                $orderBy = NULL;
             }     
         }
-        $sql .= ' ORDER BY ' . $orderBy;
+        if ($orderBy != NULL )  {
+            $sql .= ' ORDER BY ' . $orderBy;
+        }
         return $sql;
     }
 

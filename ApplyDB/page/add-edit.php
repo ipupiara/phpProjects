@@ -13,9 +13,9 @@ use \TodoList\Validation\TodoValidator;
 
 $errors = [];
 $todo = null;
-$edit = array_key_exists('id', $_GET);
+$edit = array_key_exists('id', $_GET);     //  edit in contrary to add
 if ($edit) {
-    $todo = Utils::getTodoByGetId();
+    $todo = Utils::getTodoByGetId();  // also gets id via urlparam
 } else {
     // set defaults / PN 25. feb 2018 but in constructor and never in UI code  (rules of OO-development!)
     // to avoid any redundancy  
@@ -24,7 +24,12 @@ if ($edit) {
 
 if (array_key_exists('cancel', $_POST)) {
     // redirect
-    Utils::redirect('detail', ['id' => $todo->getId()]);
+    $cid = $todo->getId();
+    if ($cid != NULL) {
+        Utils::redirect('detail', ['id' => $cid]);
+    } else {
+        Utils::redirect('home', []);   
+    }
 } elseif (array_key_exists('save', $_POST)) {
     // for security reasons, do not map the whole $_POST['todo']
     $data = [
