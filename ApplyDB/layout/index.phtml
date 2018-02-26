@@ -55,16 +55,25 @@ use \TodoList\Util\Utils;
                         <div class="inner">
                             <ul class="list">
                                 <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
-                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies"
-                                             ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
-                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies"
-                                             ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
-                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies"
-                                             ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
-                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"
-                                             ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>
-                                 <?php if ( $_SESSION['credentialsValid']): ?>             
-                                    <li><span><a href="<?php echo Utils::createLink('homeLogout'); ?>">Logout</a></span></li>
+                                <?php if ( $_SESSION['credentialsValid']): ?>             
+                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies" class =enabled  
+                                                  ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
+                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =enabled  
+                                                  ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
+                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =enabled  
+                                                  ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
+                                     <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company" class =enabled  
+                                                  ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>                                
+                                     <li><span><a href="<?php echo Utils::createLink('homeLogout'); ?>">Logout</a></span></li>
+                                <?php else: ?> 
+                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies" class =disabled  
+                                                 ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
+                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =disabled 
+                                                 ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
+                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =disabled 
+                                                 ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
+                                    <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"  class =disabled
+                                                 ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>
                                 <?php endif; ?>    
                             </ul>
                         </div>

@@ -346,3 +346,14 @@ ul#flashes li {
 .material-icons.new {
     color: khaki;
 }
+
+.disabled {
+   pointer-events: none;
+   cursor: default;
+   opacity: 0.5;
+}
+
+.enabled {
+    pointer-events: auto;
+    opacity: 1;    
+}
