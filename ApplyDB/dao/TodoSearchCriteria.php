@@ -11,6 +11,7 @@ namespace TodoList\Dao;
 final class TodoSearchCriteria {
 
     private $status = null;
+    private $cNamePart = null;
 
 
     /**
@@ -25,6 +26,18 @@ final class TodoSearchCriteria {
      */
     public function setStatus($status) {
         $this->status = $status;
+        return $this;
+    }
+
+    public function getCNamePart() {
+        return $this->cNamePart;
+    }
+
+    /**
+     * @return this
+     */
+    public function setCNamePart($compName) {
+        $this->cNamePart = $compName;
         return $this;
     }
 

@@ -11,6 +11,7 @@ use \TodoList\Config\Config;
 use \TodoList\Exception\NotFoundException;
 use \TodoList\Mapping\TodoMapper;
 use \TodoList\Model\Todo;
+use \TodoList\Dao\TodoSearchCriteria;
 
 /**
  * DAO for {@link \TodoList\Model\Todo}.
@@ -38,6 +39,24 @@ final class TodoDao {
         } catch (Exception $ex) {
  //           throw new Exception('DB connection error: ' . $ex->getMessage());
         }
+        return $result;
+    }
+    
+    public static function checkMoreThanAmtCompanyWithNameLike($cName,$amt)
+    {
+        $result = false;
+        try {
+            $dao = new TodoDao();
+            $sCrit = new TodoSearchCriteria();
+            $search = $sCrit->setCNamePart($cName);
+            $todos = $dao->find($search);
+            $amtTodos = count($todos);
+            if ($amtTodos > $amt) {
+                $result = false;
+            }
+        } catch (Exception $ex) {
+ //           throw new Exception('DB connection error: ' . $ex->getMessage());
+        }       
         return $result;
     }
     
@@ -107,13 +126,27 @@ final class TodoDao {
         }
         return $this->db;
     }
+    
+    private static function conditionLinkPrefix($first)
+    {
+        $res = '';
+        if ($first) {
+            $res.=' where ';                    
+            $first = false;
+        } else  {
+            $res.=' and ';
+        }
+        return res;
+    }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
+        $first = true;
         $sql = 'SELECT * FROM applycompanies ';
         $orderBy = 'dateAdded desc';
         if ($search !== null) {
-            if ($search->getStatus() !== null) {
-                $sql .= ' where status = ' . $this->getDb()->quote($search->getStatus());
+            if ($search->getStatus() !== null) {   
+                $condPrefix = TodoDao::conditionLinkPrefix($first);
+                $sql .= $condPrefix. ' status = ' . $this->getDb()->quote($search->getStatus());
 /*                switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
                         $orderBy = 'priority';
@@ -125,7 +158,18 @@ final class TodoDao {
                     default:
                         throw new Exception('No order for status: ' . $search->getStatus());
                 }  */
-            }  
+            }
+            if ($search->getCNamePart() !== null) {
+                if ($first) {
+                    $sql.=' where ';                    
+                    $first = false;
+                } else  {
+                    $sql.=' and ';
+                }
+                $condPrefix = TodoDao::conditionLinkPrefix($first);
+                $stringToMatch =  $condPrefix. $this->getDb()->quote('%'.$search->getCNamePart().'%');
+                $sql .= ' company like ' . $stringToMatch;
+            }     
         }
         $sql .= ' ORDER BY ' . $orderBy;
         return $sql;

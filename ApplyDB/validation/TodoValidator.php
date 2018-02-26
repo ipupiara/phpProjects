@@ -5,6 +5,7 @@ namespace TodoList\Validation;
 
 use \TodoList\Exception\NotFoundException;
 use \TodoList\Model\Todo;
+use \TodoList\Dao\TodoDao;
 
 /**
  * Validator for {@link \TodoList\Model\Todo}.
@@ -37,6 +38,18 @@ final class TodoValidator {
         }
         if (!trim($todo->getCompany())) {
             $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.');
+        } else {
+            // check when more than one company with the almost same name
+            $amt = 0;
+            if ($todo->getId()) { $amt = 1; }
+            $cName = substr(trim($todo->getCompany()),0,5);
+            $pos=strpos($cName," ");
+            if ($pos !== false) {
+               $cName = substr($cName,0,$pos);
+            }
+            if (TodoDao::checkMoreThanAmtCompanyWithNameLike($cName,$amt)) {
+                $errors[] = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.cName);
+            }
         }
         return $errors;
     }
