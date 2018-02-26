@@ -48,7 +48,7 @@ final class TodoValidator {
                $cName = substr($cName,0,$pos);
             }
             if (TodoDao::checkMoreThanAmtCompanyWithNameLike($cName,$amt)) {
-                $errors[] = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.$cName);
+                $errors[] = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.$cName, true);
             }
         }
         return $errors;

@@ -357,3 +357,7 @@ ul#flashes li {
     pointer-events: auto;
     opacity: 1;    
 }
+
+.tab {
+    margin-left: 2.5em
+}
