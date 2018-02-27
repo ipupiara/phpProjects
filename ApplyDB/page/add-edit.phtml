@@ -16,23 +16,12 @@ use \TodoList\Validation\ValidationError;
 function error_field($title, array $errors) {
     foreach ($errors as $error) {
         /* @var $error ValidationError */
-        if ($error->getSource() == $title) {
+        if ($error->getSource() == ValidationError::getErrorSourceFromTitle($title)) {
             return ' error-field';
         }
     }
     return '';
 }
-
-function insertPromptForIgnorableError($title, array $errors)
-{
-    $res = ''; 
-    foreach ($errors as $error) {
-        if (($error->getSource() == $title) && ($error->getIgnorable())) {
-            $res = '<label class=tab>Ignore....... </label><input type=checkbox name = '.$error->getSource().'IgnoreCheckbox >'; 
-        }
-    }
-    return $res;
-}   
 ?>
 
 <h1>
@@ -49,6 +38,11 @@ function insertPromptForIgnorableError($title, array $errors)
     <?php foreach ($errors as $error): ?>
         <?php /* @var $error ValidationError */ ?>
         <li><?php echo $error->getMessage(); ?></li>
+        <?php if ($error->getIgnorable())  {
+            $res = '<label class=tab>Ignore....... </label><input type=checkbox name = '.$error->getErrorCheckboxName() >'; 
+            echo $res;
+        }
+        ?> 
     <?php endforeach; ?>
 </ul>
 <?php endif; ?>
@@ -75,7 +69,6 @@ function insertPromptForIgnorableError($title, array $errors)
             <label>Company:</label>
             <input type="text" name="todo[company]" value="<?php echo Utils::escape($todo->getCompany()); ?>"
                    class="text<?php echo error_field('company', $errors); ?>"/>
-            <?php echo  insertPromptForIgnorableError('company',$errors); ?>
         </div>
         <div class="field">
             <label>Address:</label>

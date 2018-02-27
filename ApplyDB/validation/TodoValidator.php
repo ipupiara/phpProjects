@@ -24,17 +24,17 @@ final class TodoValidator {
     public static function validate(Todo $todo) {
         $errors = [];
         if (!$todo->getDateAdded()) {
-            $errors[] = new \TodoList\Validation\ValidationError('dateAdded', 'Empty or invalid date added.');
+            $errors[] = new \TodoList\Validation\ValidationError('dateAdded', 'Empty or invalid date added.',ValidationError::INVALID_DATEADDED);
         }
         if (!trim($todo->getPriority())) {
-            $errors[] = new \TodoList\Validation\ValidationError('priority', 'Priority cannot be empty.');
+            $errors[] = new \TodoList\Validation\ValidationError('priority', 'Priority cannot be empty.',ValidationError::EMPTY_PRIORITY);
         } elseif (!self::isValidPriority($todo->getPriority())) {
-            $errors[] = new \TodoList\Validation\ValidationError('priority', 'Invalid Priority set.');
+            $errors[] = new \TodoList\Validation\ValidationError('priority', 'Invalid Priority set.', ValidationError::INVALID_PRIORITY);
         }
         if (!trim($todo->getStatus())) {
-            $errors[] = new \TodoList\Validation\ValidationError('status', 'Status cannot be empty.');
+            $errors[] = new \TodoList\Validation\ValidationError('status', 'Status cannot be empty.', ValidationError::EMPTY_STATUS);
         } elseif (!self::isValidStatus($todo->getStatus())) {
-            $errors[] = new \TodoList\Validation\ValidationError('status', 'Invalid Status set.');
+            $errors[] = new \TodoList\Validation\ValidationError('status', 'Invalid Status set.', ValidationError::INVALID_STATUS);
         }
         if (!trim($todo->getCompany())) {
             $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.');
@@ -48,7 +48,12 @@ final class TodoValidator {
                $cName = substr($cName,0,$pos);
             }
             if (TodoDao::checkMoreThanAmtCompanyWithNameLike($cName,$amt)) {
-                $errors[] = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.$cName, true);
+                $err = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.$cName, ValidationError::SIMILAR_COMPANY_CONFLICT, true);
+                
+                if (($_POST[$err->getErrorCheckboxName()] ) && ($_POST[$err->getErrorCheckboxName()])) {
+     //               $errors[] = $err;
+                }
+                $errors[] = $err;
             }
         }
         return $errors;

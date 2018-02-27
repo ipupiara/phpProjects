@@ -8,20 +8,32 @@ namespace TodoList\Validation;
  */
 final class ValidationError {
 
+      
+    const INVALID_DATEADDED = '101';
+    const EMPTY_PRIORITY = '102';
+    const INVALID_PRIORITY = '103';
+    const EMPTY_STATUS = '104';
+    const INVALID_STATUS = '105';
+    const EMPTY_COMPANY = '106';
+    const SIMILAR_COMPANY_CONFLICT = '201';
+  
+    
+    
     private $source;
     private $message;
     private $ignorable;
-
+    private $errorId;
 
     /**
      * Create new validation error.
      * @param mixed $source source of the error
      * @param string $message error message
      */
-    function __construct($source, $message, $ignore = false) {
+    function __construct($source, $message, $errId, $ignore = false) {
         $this->source = $source;
         $this->message = $message;
         $this->ignorable = $ignore;
+        $this->errorId = $errId;
     }
 
     /**
@@ -43,5 +55,30 @@ final class ValidationError {
     public function getIgnorable() {
         return $this->ignorable;
     }
+    
+    public function getErrorTitle() {
+        return $this->source .'-' .$this->errorId;
+    }
+    
+    public static function  getErrorSourceFromTitle(String $title) 
+    {
+        $res = '';
+        $pos = strpos($title,'-');        
+        $res = substr($title,0,$pos);
+        return $res;
+    }
 
+    public static function getErrorIdFromTitle(String $title)
+    {
+        $res ='';
+        $pos = strpos($title,'-');        
+        $res = substr($title,$pos+1);    
+        return res;
+    }
+            
+    public function getErrorCheckboxName()
+    {
+        $res = $this->getErrorTitle().'_IgnoreCheckbox';
+        return $res;
+    } 
 }
