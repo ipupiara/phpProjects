@@ -42,9 +42,8 @@ final class TodoDao {
         return $result;
     }
     
-    public static function checkMoreThanAmtCompanyWithNameLike($cName,$amt)
+    public static function checkMoreThanAmtCompanyWithNameLike($cName,$amt, &$todos)
     {
-        $result = false;
         try {
             $dao = new TodoDao();
             $sCrit = new TodoSearchCriteria();
@@ -55,7 +54,7 @@ final class TodoDao {
                 $result = true;
             }
         } catch (Exception $ex) {
- //           throw new Exception('DB connection error: ' . $ex->getMessage());
+            throw new Exception('error: ' . $ex->getMessage());
         }       
         return $result;
     }

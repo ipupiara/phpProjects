@@ -33,22 +33,30 @@ function error_field($title, array $errors) {
     <?php endif; ?>
 </h1>
 
-<?php if (!empty($errors)): ?>
-<ul class="errors">
-    <?php foreach ($errors as $error): ?>
-        <?php /* @var $error ValidationError */ ?>
-        <li><?php echo $error->getMessage(); ?></li>
-        <?php if ($error->getIgnorable())  {
-            $res = '<label class=tab>Ignore....... </label><input type=checkbox name = '.$error->getErrorCheckboxName() >'; 
-            echo $res;
-        }
-        ?> 
-    <?php endforeach; ?>
-</ul>
-<?php endif; ?>
+
 
 <form action="#" method="post"  method="get">
     <fieldset>
+        
+       <?php if (!empty($errors)): ?>
+       <ul class="errors">
+           <?php foreach ($errors as $error): ?>
+               <?php /* @var $error ValidationError */ ?>
+               <li>      
+                    <?php echo $error->getMessage(); ?>
+                    <?php if ($error->getIgnorable()): ?>       
+                        &nbsp&nbspIgnore....... <input type=checkbox class=tab name = "<?php echo $error->getErrorCheckboxName() ?>"  >    
+                    <?php endif; ?> 
+                    <?php if ($error->getInfoArray() != NULL)  : ?>
+                        <?php foreach ($error->getInfoArray() as $comp): ?>
+                            <br>&nbsp;&nbsp;&nbsp;->&nbsp;<?php echo $comp->getCompany().',  '.$comp->getBusiness()   ?>
+                        <?php endforeach; ?>  
+                    <?php endif; ?>    
+               </li>  
+           <?php endforeach; ?>
+       </ul>
+       <?php endif; ?> 
+        
         <div class="field">
             <label>Title:</label>
              <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>"

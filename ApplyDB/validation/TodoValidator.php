@@ -36,8 +36,14 @@ final class TodoValidator {
         } elseif (!self::isValidStatus($todo->getStatus())) {
             $errors[] = new \TodoList\Validation\ValidationError('status', 'Invalid Status set.', ValidationError::INVALID_STATUS);
         }
+/*
+        if (!trim($todo->getBusiness())) {
+            $errors[] = new \TodoList\Validation\ValidationError('business', 'business cannot be empty.',ValidationError::EMPTY_COMPANY);
+        }
+ *      this code serves just for debugging reasons tobe able to debug more than one error
+ */
         if (!trim($todo->getCompany())) {
-            $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.');
+            $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.',ValidationError::EMPTY_COMPANY);
         } else {
             // check when more than one company with the almost same name
             $amt = 0;
@@ -47,16 +53,15 @@ final class TodoValidator {
             if ($pos !== false) {
                $cName = substr($cName,0,$pos);
             }
-            if (TodoDao::checkMoreThanAmtCompanyWithNameLike($cName,$amt)) {
-                $err = new \TodoList\Validation\ValidationError('company', 'More than one Company wit name like '.$cName, ValidationError::SIMILAR_COMPANY_CONFLICT, true);
-                
-                if (($_POST[$err->getErrorCheckboxName()] ) && ($_POST[$err->getErrorCheckboxName()])) {
-     //               $errors[] = $err;
-                }
-                $errors[] = $err;
+            $arr=[];
+            if (TodoDao::checkMoreThanAmtCompanyWithNameLike($cName,$amt,$arr)) {
+                $err = new \TodoList\Validation\ValidationError('company', 'More than one Company with name like "'. $cName.'".' , ValidationError::SIMILAR_COMPANY_CONFLICT, true,$arr);
+                if (!$err->postContainsResolvement()) {   
+                    $errors[] = $err;
+                }          
             }
         }
-        return $errors;
+         return $errors;
     }
 
     /**
