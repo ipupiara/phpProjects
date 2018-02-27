@@ -183,7 +183,7 @@ form input.submit {
     color: red;
 }
 .error-field {
-    background-color: pink;
+    background-color: #ffcfb3
 }
 
 /** boxes **/
@@ -361,3 +361,23 @@ ul#flashes li {
 .tab {
     margin-left: 2.5em
 }
+
+.pink {
+    color: #e60073;
+}
+
+.companies {
+    margin-left: 2.5em
+}
+
+.companies li{
+    color: black;
+}
+
+/*
+
+#0033cc;
+
+
+
+*/

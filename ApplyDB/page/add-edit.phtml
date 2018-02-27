@@ -16,12 +16,14 @@ use \TodoList\Validation\ValidationError;
 function error_field($title, array $errors) {
     foreach ($errors as $error) {
         /* @var $error ValidationError */
-        if ($error->getSource() == ValidationError::getErrorSourceFromTitle($title)) {
+        if ($error->getSource() == $title) {
             return ' error-field';
         }
     }
     return '';
 }
+
+/* @var $todo Todo */
 ?>
 
 <h1>
@@ -34,29 +36,28 @@ function error_field($title, array $errors) {
 </h1>
 
 
-
 <form action="#" method="post"  method="get">
     <fieldset>
-        
-       <?php if (!empty($errors)): ?>
-       <ul class="errors">
-           <?php foreach ($errors as $error): ?>
-               <?php /* @var $error ValidationError */ ?>
-               <li>      
-                    <?php echo $error->getMessage(); ?>
+	
+        <?php if (!empty($errors)): ?>
+            <ul class="errors">
+                <?php foreach ($errors as $error): ?>
+                    <?php /* @var $error ValidationError */ ?>
+                    <li><?php echo $error->getMessage(); ?>
                     <?php if ($error->getIgnorable()): ?>       
-                        &nbsp&nbspIgnore....... <input type=checkbox class=tab name = "<?php echo $error->getErrorCheckboxName() ?>"  >    
+                        &nbsp&nbspIgnore warning ? <input type=checkbox class=tab name = "<?php echo $error->getErrorCheckboxName() ?>"  >  </li>  
                     <?php endif; ?> 
                     <?php if ($error->getInfoArray() != NULL)  : ?>
-                        <?php foreach ($error->getInfoArray() as $comp): ?>
-                            <br>&nbsp;&nbsp;&nbsp;->&nbsp;<?php echo $comp->getCompany().',  '.$comp->getBusiness()   ?>
-                        <?php endforeach; ?>  
+                        <ol class="companies">
+                            <?php foreach ($error->getInfoArray() as $comp): ?>
+                                <li><?php echo $comp->getCompany().',  '.$comp->getBusiness()   ?></li>
+                            <?php endforeach; ?>  
+                        </ol>    
                     <?php endif; ?>    
-               </li>  
-           <?php endforeach; ?>
-       </ul>
-       <?php endif; ?> 
-        
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+	
         <div class="field">
             <label>Title:</label>
              <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>"
