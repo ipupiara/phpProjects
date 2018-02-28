@@ -22,7 +22,8 @@ final class TodoDao {
 
     /** @var PDO */
     private $db = null;
-
+    private $orderField = 'dateAdded';
+    private $orderDirection = 'desc';
 
     public function __destruct() {
         // close db connection
@@ -285,6 +286,18 @@ final class TodoDao {
 
     public static function formatBoolean($bool) {
         return $bool ? 1 : 0;
+    }
+    
+    public static function setSorting($sort)
+    {
+        
+    }
+    
+    public static function getSorting()
+    {
+        $res = '';
+        
+        return $res;
     }
 
 }

@@ -175,7 +175,7 @@ final class Index {
     private function hasTemplate($page) {
         return file_exists($this->getTemplate($page));
     }
-
+     
 }
 
 $index = new \TodoList\Index();

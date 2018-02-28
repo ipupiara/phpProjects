@@ -14,13 +14,33 @@ use \TodoList\Util\Utils;
 //  $todos - TODOs to be displayed
 
 ?>
-
+<div class="titleBox">
 <h1>
     <?php echo Utils::iconStatus($status); ?>
     <?php echo " ".$amtTodos." "; ?>
     <?php echo $title; ?>
 </h1>
-
+</div>
+ <div  class="sortingBox">
+        <form action="index.php?page=list&status=<?php echo $status ?>" method="post" class="fRight">  
+            <fieldset  >
+                <legend>&nbsp;list sorting&nbsp;</legend>
+                <div class="wrapper">
+                    <table>
+                        <tr>
+                            <td>  <input type="submit" name="companySortButton" value="company" class="submit" />  </td>
+                            <td> <input type="submit" name="dateAddedSortButton" value="date added" class="submit" />  </td>
+                        </tr>    
+                        <tr>
+                            <td class= aligncenter> <i class="material-icons multi">arrow_downward</i>  </td>
+                            <td class= aligncenter> <i class="material-icons multi">arrow_upward</i>  </td>
+                        </tr>
+                    </table>
+                </div>    
+            </fieldset>
+              
+        </form>
+      </div>  
 <?php if (empty($todos)): ?>
     <p>No TODO items found.</p>
 <?php else: ?>
