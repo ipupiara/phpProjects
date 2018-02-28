@@ -52,8 +52,7 @@ final class Todo {
     /** @var string */
     private $dateAdded;
     /** @var timestamp */
-         
-
+    
     /**
      * Create new {@link Todo} with default properties set.
      */

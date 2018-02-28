@@ -28,12 +28,12 @@ use \TodoList\Util\Utils;
                 <div class="wrapper">
                     <table>
                         <tr>
-                            <td>  <input type="submit" name="companySortButton" value="company" class="submit" />  </td>
-                            <td> <input type="submit" name="dateAddedSortButton" value="date added" class="submit" />  </td>
+                            <td>  <input type="submit" name="companySortButton" value="company" class=<?php echo $listInstance->getCompanyButtonClass() ?> />  </td>
+                            <td> <input type="submit" name="dateAddedSortButton" value="date added" class=<?php echo $listInstance->getDateAddedButtonClass()?> />  </td>
                         </tr>    
                         <tr>
-                            <td class= aligncenter> <i class="material-icons multi">arrow_downward</i>  </td>
-                            <td class= aligncenter> <i class="material-icons multi">arrow_upward</i>  </td>
+                            <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getCompanyArrow() ?></i>  </td>
+                            <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getDateAddedArrow()    ?></i>  </td>
                         </tr>
                     </table>
                 </div>    

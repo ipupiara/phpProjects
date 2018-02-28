@@ -22,8 +22,29 @@ final class TodoDao {
 
     /** @var PDO */
     private $db = null;
-    private $orderField = 'dateAdded';
-    private $orderDirection = 'desc';
+    private static $orderField = 'dateAdded';
+    private static $orderDirection = 'desc';
+    
+    
+    private static function checkSortingVariables()
+    {
+        if ( ! isset($_SESSION['orderField'])) { 
+            $_SESSION['orderField'] = TodoDao::$orderField;
+        }  else  {
+            TodoDao::$orderField = $_SESSION['orderField'];
+        }
+       if ( ! isset($_SESSION['orderDirection'])) { 
+            $_SESSION['orderDirection'] = TodoDao::$orderDirection;
+       } else {
+           TodoDao::$orderDirection =  $_SESSION['orderDirection'];
+       }
+    }
+    
+    private static function saveSortingVariables()
+    {
+        $_SESSION['orderField'] = TodoDao::$orderField;
+        $_SESSION['orderDirection'] = TodoDao::$orderDirection;
+    }
 
     public function __destruct() {
         // close db connection
@@ -148,7 +169,7 @@ final class TodoDao {
                 $condPrefix = TodoDao::conditionLinkPrefix($first);
                 $first = false;
                 $sql .= $condPrefix. ' status = ' . $this->getDb()->quote($search->getStatus());
-                $orderBy = 'dateAdded desc';
+                $orderBy = TodoDao::$orderField.' '.TodoDao::$orderDirection;
 /*                switch ($search->getStatus()) {
                     case Todo::STATUS_PENDING:
                         $orderBy = 'priority';
@@ -290,14 +311,42 @@ final class TodoDao {
     
     public static function setSorting($sort)
     {
-        
+        TodoDao::checkSortingVariables();
+        if ($sort == 'dateAdded')  {
+            if (TodoDao::$orderField == 'dateAdded') {
+                if (TodoDao::$orderDirection == 'asc') {
+                    TodoDao::$orderDirection = 'desc';
+                } else {
+                    TodoDao::$orderDirection = 'asc';
+                }
+            } else {
+                TodoDao::$orderField = 'dateAdded';
+                TodoDao::$orderDirection = 'desc';
+            }
+        }    
+        if ($sort == 'company')  {
+            if (TodoDao::$orderField == 'company') {
+                if (TodoDao::$orderDirection == 'asc') {
+                    TodoDao::$orderDirection = 'desc';
+                } else {
+                    TodoDao::$orderDirection = 'asc';
+                }
+            } else {
+                TodoDao::$orderField = 'company';
+                TodoDao::$orderDirection = 'asc';
+            }            
+        }
+        TodoDao::saveSortingVariables();
     }
     
-    public static function getSorting()
-    {
-        $res = '';
+    
+    public static function getSortingField()
+    {       
+        return TodoDao::$orderField;
         
-        return $res;
+    }public static function getSortingDirection()
+    { 
+        return TodoDao::$orderDirection;
     }
 
 }
