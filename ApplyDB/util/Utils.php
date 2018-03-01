@@ -19,6 +19,7 @@ final class Utils {
         Todo::STATUS_PENDING => 'event_note',
         Todo::STATUS_DONE => 'event_available',
         Todo::STATUS_VOIDED => 'event_busy',
+        Todo::STATUS_ALL  =>  'unfold_more',
     ];
 
     private function __construct() {

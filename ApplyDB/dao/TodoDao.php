@@ -164,32 +164,21 @@ final class TodoDao {
     private function getFindSql(TodoSearchCriteria $search = null) {
         $first = true;
         $sql = 'SELECT * FROM applycompanies ';
+        $orderBy=NULL;
         if ($search !== null) {
             if ($search->getStatus() !== null) {   
                 $condPrefix = TodoDao::conditionLinkPrefix($first);
                 $first = false;
                 $sql .= $condPrefix. ' status = ' . $this->getDb()->quote($search->getStatus());
-                $orderBy = TodoDao::$orderField.' '.TodoDao::$orderDirection;
-/*                switch ($search->getStatus()) {
-                    case Todo::STATUS_PENDING:
-                        $orderBy = 'priority';
-                        break;
-                    case Todo::STATUS_DONE:
-                    case Todo::STATUS_VOIDED:
-                        $orderBy = 'priority';
-                        break;
-                    default:
-                        throw new Exception('No order for status: ' . $search->getStatus());
-                }  */
             }
             if ($search->getCompanyNamePart() !== null) {
                 $condPrefix = TodoDao::conditionLinkPrefix($first);
                 $first = false;
                 $stringToMatch =  $this->getDb()->quote('%'.$search->getCompanyNamePart().'%');
                 $sql .= $condPrefix.' company like ' . $stringToMatch;
-                $orderBy = NULL;
             }     
         }
+        $orderBy = TodoDao::$orderField.' '.TodoDao::$orderDirection;
         if ($orderBy != NULL )  {
             $sql .= ' ORDER BY ' . $orderBy;
         }

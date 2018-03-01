@@ -4,6 +4,7 @@
 namespace TodoList;
 
 use \TodoList\Dao\TodoDao;
+use \TodoList\Model\Todo;
 use \TodoList\Dao\TodoSearchCriteria;
 use \TodoList\Util\Utils;
 use \TodoList\Validation\TodoValidator;
@@ -85,14 +86,15 @@ final class listClass
 $listInstance = new listClass();
 $listInstance->handleSortingInput();
 
-
-$status = Utils::getUrlParam('status');
-TodoValidator::validateStatus($status);
-
-$dao = new TodoDao();
-$search = (new TodoSearchCriteria())
+ $status = Utils::getUrlParam('status');
+ TodoValidator::validateStatus($status);
+if ($status == TODO::STATUS_ALL) {
+    $search = NULL;
+} else {
+    $search = (new TodoSearchCriteria())
         ->setStatus($status);
-
+}
+$dao = new TodoDao();
 // data for template
 $title = Utils::capitalize($status) . ' Apply Companies';
 $todos = $dao->find($search);

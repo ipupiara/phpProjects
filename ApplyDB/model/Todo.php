@@ -20,6 +20,7 @@ final class Todo {
     const STATUS_PENDING = "PENDING";
     const STATUS_DONE = "DONE";
     const STATUS_VOIDED = "VOIDED";
+    const STATUS_ALL   = "ALL";
 
     /** @var int */
     private $id;
@@ -70,6 +71,7 @@ final class Todo {
             self::STATUS_PENDING,
             self::STATUS_DONE,
             self::STATUS_VOIDED,
+            self::STATUS_ALL,
         ];
     }
 
