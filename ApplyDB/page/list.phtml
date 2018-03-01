@@ -7,6 +7,7 @@ use \DateTime;
 use \TodoList\Model\Todo;
 use \TodoList\Util\Utils;
 
+
 //~ Template for list.php
 // variables:
 //  $title - page title
@@ -28,14 +29,30 @@ use \TodoList\Util\Utils;
                 <div class="wrapper">
                     <table>
                         <tr>
-                            <td>  <input type="submit" name="companySortButton" value="company" class=<?php echo $listInstance->getCompanyButtonClass() ?> />  </td>
+                            <td>  <input type="submit" name="companySortButton" value="company" class=" <?php echo $listInstance->getCompanyButtonClass()  ?> " />  </td>
                             <td> <input type="submit" name="dateAddedSortButton" value="date added" class=<?php echo $listInstance->getDateAddedButtonClass()?> />  </td>
                         </tr>    
                         <tr>
                             <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getCompanyArrow() ?></i>  </td>
                             <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getDateAddedArrow()    ?></i>  </td>
                         </tr>
-                    </table>
+                    </table>    
+                    <?php if ($status == TODO::STATUS_ALL)  : ?>
+                        <table>
+                            <tr>
+                                <td>company similar to:</td> 
+                                
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="similarText" value= "<?php echo $similarText ?>"    /></td>
+                                <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getSimilarTextIcon()    ?></i>  </td>
+                            </tr>
+                            <tr>
+                                <td>min. 3 chars</td>
+                                <td>  <input type="submit" name="similarTextSortButton" value="go" class=<?php echo $listInstance->getSimilarTextButtonClass()?> />     </td>
+                            </tr>
+                        </table>    
+                    <?php endif; ?>
                 </div>    
             </fieldset>
               
@@ -48,8 +65,13 @@ use \TodoList\Util\Utils;
         <?php foreach ($todos as $todo): ?>
             <li>
                 <h3>
-                    <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
-                    <?php echo Utils::iconPriority($todo->getPriority()); ?>
+                    <?php  if ($status == TODO::STATUS_ALL) : ?>
+                        <?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>
+                    <?php else: ?>
+                        <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
+                        <?php echo Utils::iconPriority($todo->getPriority()); ?>
+                    <?php endif; ?>
+                    
                 </h3>
                 <?php if ($todo->getBusiness()): ?>
                     <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
