@@ -40,11 +40,10 @@ use \TodoList\Util\Utils;
                     <?php if ($status == TODO::STATUS_ALL)  : ?>
                         <table>
                             <tr>
-                                <td>company similar to:</td> 
-                                
+                                <td>company similar to:</td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="similarText" value= "<?php echo $similarText ?>"    /></td>
+                                <td><input type="text" name="similarText" value= "<?php echo $listInstance->getSimilarText() ?>"    /></td>
                                 <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getSimilarTextIcon()    ?></i>  </td>
                             </tr>
                             <tr>

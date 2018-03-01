@@ -17,12 +17,17 @@ final class listClass
     private $similarTextIcon;
     private $dateAddedButtonClass;
     private $companyButtonClass;
-    private $similarTextButtonClass;
-        
+    private $similarTextButtonClass;    
+    private $similarText;
+
+
+
+
     public function __construct() {
         $this->dateAddedArrow='';
         $this->companyArrow = '';
         $this->similarTextIcon = '';
+        $this->similarText = '';
     }
     
     private function setSortingUi()
@@ -50,6 +55,7 @@ final class listClass
                $this->companyArrow ='arrow_downward'; 
            }            
         }
+        $this->similarTextIcon = 'unfold_more';
     }
     
     public function getCompanyArrow () 
@@ -81,24 +87,29 @@ final class listClass
     {
         return $this->similarTextIcon;
     }
+    
+    public function getSimilarText()
+    {
+        return $this->similarText;
+    }
  /*
   * 
   * <!---                               <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getSimilarTextIcon()    ?></i>  </td> -->
   *  <td><input type="text" name="similarText" value= "<?php echo $similarText ?>"    /></td>
-  * 
+  *
   */   
     public function handleSortingInput()
     {
         $sorting = NULL;
+        $this->similarText = $_POST['similarText'];
         if (array_key_exists('companySortButton', $_POST)) {
             $sorting = 'company';
         } elseif (array_key_exists('dateAddedSortButton', $_POST)) {
             $sorting= 'dateAdded';
         } elseif (array_key_exists('similarTextSortButton', $_POST))  {
-            if (array_key_exists('similarTextSortButton', $_POST)) {
-                Flash::addFlash("text was added");
-            }  else {
-                Flash::addFlash("no text");
+            if (strlen($this->similarText) < 3)
+            {
+                Flash::addFlash("at least 3 characters needed");
             }
         }
         if ($sorting != NULL) {
@@ -114,7 +125,6 @@ final class listClass
 
 $listInstance = new listClass();
 $listInstance->handleSortingInput();
-$similarText = "";
 
  $status = Utils::getUrlParam('status');
  TodoValidator::validateStatus($status);
