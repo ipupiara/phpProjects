@@ -302,7 +302,7 @@ final class TodoDao {
         return $bool ? 1 : 0;
     }
     
-    public static function setSorting($sort)
+    public static function setSorting($sort,$likeString = NULL)
     {
         TodoDao::checkSortingVariables();
         if ($sort == 'dateAdded')  {
@@ -332,15 +332,24 @@ final class TodoDao {
         if ($sort == 'similarTextSort')  {
             TodoDao::$orderField = 'tempSortFloat';
             TodoDao::$orderDirection = 'desc';
-            $dao = new TodoDao();
-            $dao->establishSimilarTextSort();
+            if (strlen($likeString) >= TodoDao::SIMILARTEXT_MIN_CHARS)  {
+                $dao = new TodoDao();
+                $dao->establishSimilarTextSort($likeString);
+            }
         }
         TodoDao::saveSortingVariables();
     }
     
-    private function establishSimilarTextSort()
+    private function establishSimilarTextSort($likeString)
     {
-        //  check at least 3 chars given
+        $allApplies = $this->find();
+        foreach ($allApplies as $apply) {
+            $pctVal = 0.0;
+            similar_text ( $likeString , $apply->getCompany() ,$pctVal  );
+            $apply->setTempSortFloat($pctVal);
+            $this->save($apply);
+        }
+        
     }
     
     public static function getSortingField()

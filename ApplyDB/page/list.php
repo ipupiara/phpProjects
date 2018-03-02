@@ -27,7 +27,7 @@ final class listClass
         $this->dateAddedArrow='';
         $this->companyArrow = '';
         $this->similarTextIcon = '';
-        $this->similarText = '';
+        $this->similarText = NULL;
     }
     
     private function setSortingUi()
@@ -123,7 +123,7 @@ final class listClass
             $sorting = 'similarTextSort';
         }  else {}
         if ($sorting != NULL) {
-            TodoDao::setSorting($sorting);
+            TodoDao::setSorting($sorting,$this->similarText);
         }   
         $this->setSortingUi();
         
