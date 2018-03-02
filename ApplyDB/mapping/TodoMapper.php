@@ -84,6 +84,9 @@ final class TodoMapper {
                 $todo->setDateAdded($dateAdded);
             }
         }   
+        if (array_key_exists('tempSortFloat', $properties)) {
+            $todo->setTempSortFloat(trim($properties['tempSortFloat']));
+        }
     }
     
     public static function phpArrayFromTodo (Todo $todo)

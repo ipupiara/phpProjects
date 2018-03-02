@@ -53,6 +53,7 @@ final class Todo {
     /** @var string */
     private $dateAdded;
     /** @var timestamp */
+    private $tempSortFloat;
     
     /**
      * Create new {@link Todo} with default properties set.
@@ -62,8 +63,7 @@ final class Todo {
         $this->setDateAdded($now);
         $this->setPriority(Todo::PRIORITY_MEDIUM);
         $this->setStatus(Todo::STATUS_PENDING);
-
- 
+        $this->tempSortFloat = 0.0;
     }
 
     public static function allStatuses() {
@@ -213,5 +213,13 @@ final class Todo {
         TodoValidator::validateStatus($status);
         $this->status = $status;
     }
+    
+    public function getTempSortFloat() {
+        return $this->tempSortFloat;
+    }
+
+    public function setTempSortFloat($flt) {
+        $this->tempSortFloat = $flt;
+    }   
 }
  

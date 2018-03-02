@@ -20,6 +20,8 @@ use \TodoList\Dao\TodoSearchCriteria;
  */
 final class TodoDao {
 
+    const SIMILARTEXT_MIN_CHARS = 3;
+    
     /** @var PDO */
     private $db = null;
     private static $orderField = 'dateAdded';
@@ -195,8 +197,8 @@ final class TodoDao {
         $todo->setDateAdded($now);
         $todo->setStatus(Todo::STATUS_PENDING);
           $sql = '
-            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded)
-                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:dateAdded)';
+            INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded,tempSortFloat)
+                VALUES (:id,:pre_name,:name,:title,:company,:address,:zip_city,:greeting_line,:business,:email,:status,:homepage,:priority,:comment,:dateAdded,:tempSortFloat)';
  
         return $this->execute($sql, $todo);
     }
@@ -221,7 +223,8 @@ final class TodoDao {
                 homepage = :homepage,      
                 priority = :priority,
                 comment = :comment,
-                dateAdded = :dateAdded
+                dateAdded = :dateAdded,
+                tempSortFloat = :tempSortFloat
             WHERE
                 id = :id';
         return $this->execute($sql, $todo);
@@ -262,6 +265,7 @@ final class TodoDao {
             ':priority' => $todo->getPriority(),
             ':comment' => $todo->getComment(),
             ':dateAdded' => self::formatDateTime($todo->getDateAdded()),
+            ':tempSortFloat' => $todo->getTempSortFloat(),
         ];
         return $params;
     }
@@ -325,15 +329,28 @@ final class TodoDao {
                 TodoDao::$orderDirection = 'asc';
             }            
         }
+        if ($sort == 'similarTextSort')  {
+            TodoDao::$orderField = 'tempSortFloat';
+            TodoDao::$orderDirection = 'desc';
+            $dao = new TodoDao();
+            $dao->establishSimilarTextSort();
+        }
         TodoDao::saveSortingVariables();
     }
     
+    private function establishSimilarTextSort()
+    {
+        //  check at least 3 chars given
+    }
     
     public static function getSortingField()
     {       
         return TodoDao::$orderField;
         
-    }public static function getSortingDirection()
+    }
+    
+    
+    public static function getSortingDirection()
     { 
         return TodoDao::$orderDirection;
     }

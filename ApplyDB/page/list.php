@@ -43,7 +43,8 @@ final class listClass
            } else {
                $this->dateAddedArrow = 'arrow_downward';
            } 
-        } elseif (TodoDao::getSortingField() == 'company')  {
+        } 
+        if (TodoDao::getSortingField() == 'company')  {
            $this->dateAddedArrow ='';
            $this->similarTextIcon = '';
            $this->companyButtonClass = 'submit';
@@ -54,8 +55,15 @@ final class listClass
            } else {
                $this->companyArrow ='arrow_downward'; 
            }            
-        }
-        $this->similarTextIcon = 'unfold_more';
+        }  
+        if (TodoDao::getSortingField() == 'tempSortFloat')  {
+           $this->dateAddedArrow ='';
+           $this->companyArrow = '';
+           $this->similarTextIcon = 'unfold_more';
+           $this->companyButtonClass = 'submitClear';
+           $this->dateAddedButtonClass = 'submitClear'; 
+           $this->similarTextButtonClass= 'submit';        
+        }  
     }
     
     public function getCompanyArrow () 
@@ -101,17 +109,19 @@ final class listClass
     public function handleSortingInput()
     {
         $sorting = NULL;
-        $this->similarText = $_POST['similarText'];
+        if (array_key_exists('similarText', $_POST)) {
+            $this->similarText = $_POST['similarText'];
+         }
         if (array_key_exists('companySortButton', $_POST)) {
             $sorting = 'company';
         } elseif (array_key_exists('dateAddedSortButton', $_POST)) {
             $sorting= 'dateAdded';
         } elseif (array_key_exists('similarTextSortButton', $_POST))  {
-            if (strlen($this->similarText) < 3)
-            {
+            if (strlen($this->similarText) < TodoDao::SIMILARTEXT_MIN_CHARS){
                 Flash::addFlash("at least 3 characters needed");
-            }
-        }
+            } 
+            $sorting = 'similarTextSort';
+        }  else {}
         if ($sorting != NULL) {
             TodoDao::setSorting($sorting);
         }   
@@ -134,8 +144,7 @@ if ($status == TODO::STATUS_ALL) {
     $search = (new TodoSearchCriteria())
         ->setStatus($status);
 }
-$dao = new TodoDao();
-// data for template
 $title = Utils::capitalize($status) . ' Apply Companies';
+$dao = new TodoDao();
 $todos = $dao->find($search);
 $amtTodos = count($todos);
