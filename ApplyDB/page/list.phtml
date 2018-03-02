@@ -65,7 +65,7 @@ use \TodoList\Util\Utils;
             <li>
                 <h3>
                     <?php  if ($status == TODO::STATUS_ALL) : ?>
-                        <?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>
+                        <?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>  pct: <?php echo $todo->getTempSortFloat(); ?>
                     <?php else: ?>
                         <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
                         <?php echo Utils::iconPriority($todo->getPriority()); ?>
