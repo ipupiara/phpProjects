@@ -137,10 +137,10 @@ $listInstance = new listClass();
 $listInstance->handleSortingInput();
 
  $status = Utils::getUrlParam('status');
- TodoValidator::validateStatus($status);
 if ($status == TODO::STATUS_ALL) {
     $search = NULL;
 } else {
+    TodoValidator::validateStatus($status);
     $search = (new TodoSearchCriteria())
         ->setStatus($status);
 }

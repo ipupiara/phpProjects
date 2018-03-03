@@ -67,7 +67,7 @@ final class Utils {
      * @return string icon for status
      */
     public static function iconStatus($status, $disabled = false, $tooltip = true) {
-        TodoValidator::validateStatus($status);
+//        TodoValidator::validateStatus($status);
         $title = $tooltip ?  : '';
         $icon = '<i class="material-icons ' . ($disabled ? 'disabled' : strtolower($status)) . '"';
         if ($tooltip) {

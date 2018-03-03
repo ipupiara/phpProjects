@@ -20,6 +20,9 @@ final class Todo {
     const STATUS_PENDING = "PENDING";
     const STATUS_DONE = "DONE";
     const STATUS_VOIDED = "VOIDED";
+    
+    
+    // not actually a valid status for a todo, only used for the links on the menu
     const STATUS_ALL   = "ALL";
 
     /** @var int */
@@ -71,7 +74,6 @@ final class Todo {
             self::STATUS_PENDING,
             self::STATUS_DONE,
             self::STATUS_VOIDED,
-            self::STATUS_ALL,
         ];
     }
 
