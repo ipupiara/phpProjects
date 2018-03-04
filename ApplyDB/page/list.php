@@ -21,6 +21,9 @@ final class listClass
     private $similarText;
 
 
+    
+    const STATUS_ALL   = "ALL";
+
 
 
     public function __construct() {

@@ -23,8 +23,11 @@ final class Todo {
     
     
     // not actually a valid status for a todo, only used for the links on the menu
+   // const STATUS_ALL   = "ALL";
     const STATUS_ALL   = "ALL";
-
+    
+    
+    
     /** @var int */
     private $id;
     /** @var string */

@@ -8,7 +8,7 @@ use Exception;
 use TodoList\Dao\TodoDao;
 use TodoList\Exception\NotFoundException;
 use TodoList\Model\Todo;
-use TodoList\Validation\TodoValidator;
+// use TodoList\Validation\TodoValidator;
 
 /**
  * Miscellaneous utility methods.

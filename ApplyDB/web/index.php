@@ -27,8 +27,6 @@ final class Index {
         'TodoList\Validation\ValidationError' => '/../validation/ValidationError.php',
         'TodoList\Util\Utils' => '/../util/Utils.php',
     ];
-
-
     /**
      * System config.
      */
