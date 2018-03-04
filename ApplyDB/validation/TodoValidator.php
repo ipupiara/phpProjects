@@ -45,7 +45,10 @@ final class TodoValidator {
         if (!trim($todo->getCompany())) {
             $errors[] = new \TodoList\Validation\ValidationError('company', 'Company cannot be empty.',ValidationError::EMPTY_COMPANY);
         } else {
-            // check when more than one company with the almost same name
+            // check and warn when more than one company with the almost same name exist on DB
+            // the user is given the chance to override this warning and add the company anyhow
+            // , eg.  this makes sense in case of a big concern with different places and productions
+            //
             $amt = 0;
             if ($todo->getId()) { $amt = 1; }
             $cName = substr(trim($todo->getCompany()),0,5);
