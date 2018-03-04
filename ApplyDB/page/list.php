@@ -114,7 +114,7 @@ final class listClass
         $sorting = NULL;
         if (array_key_exists('similarText', $_POST)) {
             $this->similarText = $_POST['similarText'];
-         }
+        }
         if (array_key_exists('companySortButton', $_POST)) {
             $sorting = 'company';
         } elseif (array_key_exists('dateAddedSortButton', $_POST)) {
@@ -123,7 +123,6 @@ final class listClass
             if (strlen($this->similarText) < TodoDao::SIMILARTEXT_MIN_CHARS){
                 Flash::addFlash("at least 3 characters needed");
             } 
-            $sorting = 'similarTextSort';
         }  else {}
         if ($sorting != NULL) {
             TodoDao::setSorting($sorting,$this->similarText);
