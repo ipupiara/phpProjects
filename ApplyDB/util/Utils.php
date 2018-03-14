@@ -77,6 +77,7 @@ final class Utils {
         return $icon;
     }
 
+    
     /**
      * Returns icon for priority.
      * @param int $priority priority

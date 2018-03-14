@@ -332,10 +332,8 @@ final class TodoDao {
         if ($sort == 'similarTextSort')  {
             TodoDao::$orderField = 'tempSortFloat';
             TodoDao::$orderDirection = 'desc';
-            if (strlen($likeString) >= TodoDao::SIMILARTEXT_MIN_CHARS)  {
-                $dao = new TodoDao();
-                $dao->establishSimilarTextSort($likeString);
-            }
+            $dao = new TodoDao();
+            $dao->establishSimilarTextSort($likeString);
         }
         TodoDao::saveSortingVariables();
     }
@@ -345,7 +343,9 @@ final class TodoDao {
         $allApplies = $this->find();
         foreach ($allApplies as $apply) {
             $pctVal = 0.0;
-            similar_text ( $likeString , $apply->getCompany() ,$pctVal  );
+            if (strlen($likeString) >= TodoDao::SIMILARTEXT_MIN_CHARS)  {
+                similar_text ( $likeString , $apply->getCompany() ,$pctVal  );
+            }
             $apply->setTempSortFloat($pctVal);
             $this->save($apply);
         }

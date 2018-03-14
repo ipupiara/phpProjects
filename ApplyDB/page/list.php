@@ -123,13 +123,12 @@ final class listClass
             if (strlen($this->similarText) < TodoDao::SIMILARTEXT_MIN_CHARS){
                 Flash::addFlash("at least 3 characters needed");
             } 
+            $sorting = 'similarTextSort';
         }  else {}
         if ($sorting != NULL) {
             TodoDao::setSorting($sorting,$this->similarText);
         }   
         $this->setSortingUi();
-        
- //       $this->setSortingUi();
     }        
 
 }
