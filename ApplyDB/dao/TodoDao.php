@@ -338,13 +338,13 @@ final class TodoDao {
         TodoDao::saveSortingVariables();
     }
     
-    private function establishSimilarTextSort($likeString)
+    private function establishSimilarTextSort( $likeString)
     {
         $allApplies = $this->find();
         foreach ($allApplies as $apply) {
             $pctVal = 0.0;
             if (strlen($likeString) >= TodoDao::SIMILARTEXT_MIN_CHARS)  {
-                similar_text ( $likeString , $apply->getCompany() ,$pctVal  );
+                similar_text ( strtolower ($likeString) , strtolower ($apply->getCompany()) ,$pctVal  );
             }
             $apply->setTempSortFloat($pctVal);
             $this->save($apply);
