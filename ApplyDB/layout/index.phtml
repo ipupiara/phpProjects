@@ -11,6 +11,12 @@ use \TodoList\Util\Utils;
 //  $template - page to be displayed (included)
 //  $flashes - flash messages
 
+if ( $_SESSION['credentialsValid']) {
+   $classId = "enabled"; 
+} else {
+    $classId = "disabled";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,30 +61,21 @@ use \TodoList\Util\Utils;
                         <div class="inner">
                             <ul class="list">
                                 <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
-                                <?php if ( $_SESSION['credentialsValid']): ?>             
-                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies" class =enabled  
-                                                  ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
-                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =enabled  
-                                                  ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
-                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =enabled  
-                                                  ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
-                                     <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_ALL]); ?>" title="All Companies" class =enabled  
-                                                  ><?php echo Utils::iconStatus(Todo::STATUS_ALL); ?>All Companies</a></span></li>
-                                     <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company" class =enabled  
-                                                  ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>                                
+                                            
+                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies" class =<?php echo $classId ?>      
+                                             ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =<?php echo $classId ?>  
+                                             ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =<?php echo $classId ?>  
+                                             ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_ALL]); ?>" title="All Companies" class =<?php echo $classId ?>  
+                                             ><?php echo Utils::iconStatus(Todo::STATUS_ALL); ?>All Companies</a></span></li>
+                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company" class =<?php echo $classId ?>  
+                                             ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>  
+                                 <li><span><a href="<?php echo Utils::createLink('getDump'); ?>" title="Dump database" class =<?php echo $classId ?>  
+                                             ><i class="material-icons multi">arrow_downward</i>Dump database</a></span></li>                       
+                                <?php if ( $_SESSION['credentialsValid']): ?>                  
                                      <li><span><a href="<?php echo Utils::createLink('homeLogout'); ?>">Logout</a></span></li>
-                                <?php else: ?> 
-                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_PENDING]); ?>" title="Pending Companies" class =disabled  
-                                                 ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
-                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =disabled 
-                                                 ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
-                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =disabled 
-                                                 ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
-                                    <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_ALL]); ?>" title="All Companies" class =disabled  
-                                                  ><?php echo Utils::iconStatus(Todo::STATUS_ALL); ?>All Companies</a></span></li>
-      
-                                    <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company"  class =disabled
-                                                 ><i class="material-icons new">insert_invitation</i>Add Company</a></span></li>
                                 <?php endif; ?>    
                             </ul>
                         </div>
