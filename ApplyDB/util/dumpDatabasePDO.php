@@ -1,3 +1,5 @@
+<?php
+
 function backupDB()
 {
     $db_config = getDbConfigFromWordPress();

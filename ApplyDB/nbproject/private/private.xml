@@ -8,6 +8,7 @@
             <file>file:/D:/projects/phpProjects/ApplyDB/layout/index.phtml</file>
             <file>file:/D:/projects/phpProjects/ApplyDB/page/list.phtml</file>
             <file>file:/D:/projects/phpProjects/ApplyDB/page/home.phtml</file>
+            <file>file:/D:/projects/phpProjects/ApplyDB/util/dumpDatabasePDO.php</file>
             <file>file:/D:/projects/phpProjects/ApplyDB/page/getcsv.php</file>
             <file>file:/D:/projects/phpProjects/ApplyDB/page/detail.phtml</file>
         </group>

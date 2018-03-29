@@ -1,13 +1,15 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+ // To change this license header, choose License Headers in Project Properties.
+ // To change this template file, choose Tools | Templates
+ // and open the template in the editor.
  
 
 $DBUSER="817636";
 $DBPASSWD="maenam22";
+//$DBUSER="root";
+//$DBPASSWD="14u24me";
 $DATABASE="817636";
 
 $filename = "backup-" . date("d-m-Y") . ".txt";
@@ -17,15 +19,20 @@ header('Content-Type: text/plain; charset= iso-8859-1');
 
 header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 
-$cmd = "mysqldump -u ".$DBUSER ." --password=".$DBPASSWD. " " .$DATABASE ;   
+$cmd = "mysqldump -u ".$DBUSER ." --password=".$DBPASSWD. " " .$DATABASE ; 
+
+//$cmd = "set";  
 
 passthru( $cmd );
-*/
 
+
+
+/*
+ * 
+ 
 
 backup_tables('localhost','817636','maenam22','817636');
 
-/* backup the db OR just a table */
 function backup_tables($host,$user,$pass,$dbName,$tables = '*')
 {
 	
@@ -87,3 +94,5 @@ function backup_tables($host,$user,$pass,$dbName,$tables = '*')
 	fwrite($handle,$return);
 //	fclose($handle);
 }
+ * 
+ */
