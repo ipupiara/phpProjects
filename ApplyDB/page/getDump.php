@@ -47,12 +47,12 @@ $dumpSettings = array(
     'no-create-info' => false,
     'where' => ''
     );
-/*
+
 $dump = new Mysqldump(
     "mysql:host=localhost;dbname=".$DATABASE,
     $DBUSER,
     $DBPASSWD,
     $dumpSettings);
-$dump->start("mysqldump-php_test001.sql");
+$dump->start();
 
-*/
+
