@@ -26,6 +26,7 @@ final class Index {
         'TodoList\Validation\TodoValidator' => '/../validation/TodoValidator.php',
         'TodoList\Validation\ValidationError' => '/../validation/ValidationError.php',
         'TodoList\Util\Utils' => '/../util/Utils.php',
+        'TodoList\Util\Mysqldump' => '/../util/Mysqldump.php',
     ];
     /**
      * System config.
