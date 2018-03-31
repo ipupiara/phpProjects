@@ -24,10 +24,7 @@ header('Content-Encoding: iso-8859-1');
 header('Content-Type: text/plain; charset= iso-8859-1');
 header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 
- $handle = fopen('php://output', 'w');
  
- fwrite($handle,"hello from backup");
-
 $dumpSettings = array(
     'exclude-tables' => array(),
     'compress' => Mysqldump::NONE,
@@ -39,6 +36,7 @@ $dumpSettings = array(
     'extended-insert' => false,
     'disable-keys' => true,
     'skip-triggers' => false,
+    'skip-comments' => false,
     'add-drop-trigger' => true,
     'routines' => true,
     'databases' => false,
