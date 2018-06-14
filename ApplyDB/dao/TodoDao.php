@@ -194,7 +194,7 @@ final class TodoDao {
     private function insert(Todo $todo) {
         $now = new DateTime();
         $todo->setId(null);
-        $todo->setDateAdded($now);
+ //       $todo->setDateAdded($now);
         $todo->setStatus(Todo::STATUS_PENDING);
           $sql = '
             INSERT INTO applycompanies (id,pre_name,name,title,company,address,zip_city,greeting_line,business,email,status,homepage,priority,comment,dateAdded,tempSortFloat)
