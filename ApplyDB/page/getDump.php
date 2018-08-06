@@ -19,7 +19,7 @@ $DBPASSWD="maenam22";
 $DATABASE="817636";
 
 
-$filename = "backup-" . date("d-m-Y") . ".txt";
+$filename = "ApplyDB-backup-" . date("d-m-Y") . ".txt";
 header('Content-Encoding: iso-8859-1');
 header('Content-Type: text/plain; charset= iso-8859-1');
 header( 'Content-Disposition: attachment; filename="' . $filename . '"' );

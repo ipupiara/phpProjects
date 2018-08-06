@@ -38,6 +38,11 @@
  * Contributor(s):
  *
  * Portions Copyrighted 2011 Sun Microsystems, Inc.
+ * 
+ * 
+ * 
+ *         .attr('readonly', 'readonly')
+ * 
  */
 
 $(document).ready(function() {
@@ -52,7 +57,9 @@ function initDatepicker() {
     $('.datepicker')
         .attr('readonly', 'readonly')
         .datepicker({
-            dateFormat: 'yy-m-d'
+            dateFormat: 'yy-m-d',
+            changeYear: true,
+            changeMonth: true
         });
 }
 
