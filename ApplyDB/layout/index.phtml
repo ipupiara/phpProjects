@@ -66,8 +66,8 @@ if ( $_SESSION['credentialsValid']) {
                                              ><?php echo Utils::iconStatus(Todo::STATUS_PENDING); ?>Pending Companies</a></span></li>
                                 <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_DONE]); ?>" title="Done Companies" class =<?php echo $classId ?>  
                                              ><?php echo Utils::iconStatus(Todo::STATUS_DONE); ?>Done Companies</a></span></li>
-                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_VOIDED]); ?>" title="Voided Companies" class =<?php echo $classId ?>  
-                                             ><?php echo Utils::iconStatus(Todo::STATUS_VOIDED); ?>Voided Companies</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_OLD_ARCHIVE]); ?>" title="Old Archive Companies" class =<?php echo $classId ?>  
+                                             ><?php echo Utils::iconStatus(Todo::STATUS_OLD_ARCHIVE); ?>Old Archive Companies</a></span></li>
                                 <li><span><a href="<?php echo Utils::createLink('list', ['status' => Todo::STATUS_ALL]); ?>" title="All Companies" class =<?php echo $classId ?>  
                                              ><?php echo Utils::iconStatus(Todo::STATUS_ALL); ?>All Companies</a></span></li>
                                 <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>" title="Add Company" class =<?php echo $classId ?>  

@@ -19,7 +19,7 @@ final class Todo {
     // status
     const STATUS_PENDING = "PENDING";
     const STATUS_DONE = "DONE";
-    const STATUS_VOIDED = "VOIDED";
+    const STATUS_OLD_ARCHIVE = "OLDARCHIVE";
     
     
     // not actually a valid status for a todo, only used for the links on the menu
@@ -76,7 +76,7 @@ final class Todo {
         return [
             self::STATUS_PENDING,
             self::STATUS_DONE,
-            self::STATUS_VOIDED,
+            self::STATUS_OLD_ARCHIVE,
         ];
     }
 

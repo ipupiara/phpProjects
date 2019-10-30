@@ -18,7 +18,7 @@ final class Utils {
     private static $STATUS_ICONS = [
         Todo::STATUS_PENDING => 'event_note',
         Todo::STATUS_DONE => 'event_available',
-        Todo::STATUS_VOIDED => 'event_busy',
+        Todo::STATUS_OLD_ARCHIVE => 'event_busy',
         Todo::STATUS_ALL  =>  'unfold_more',
     ];
 
