@@ -23,60 +23,65 @@ use \TodoList\Util\Utils;
 </h1>
 </div>
  <div  class="sortingBox">
-        <form action="index.php?page=list&status=<?php echo $status ?>" method="post" class="fRight">  
-            <fieldset  >
-                <legend>&nbsp;list sorting&nbsp;</legend>
-                <div class="wrapper">
+    <form action="index.php?page=list&status=<?php echo $status ?>" method="post" class="fRight">  
+        <fieldset  >
+            <legend>&nbsp;list sorting&nbsp;</legend>
+            <div class="wrapper">
+                <table>
+                    <tr>
+                        <td>  <input type="submit" name="companySortButton" value="company" class=" <?php echo $listInstance->getCompanyButtonClass()  ?> " />  </td>
+                        <td> <input type="submit" name="dateAddedSortButton" value="date added" class=<?php echo $listInstance->getDateAddedButtonClass()?> />  </td>
+                    </tr>    
+                    <tr>
+                        <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getCompanyArrow() ?></i>  </td>
+                        <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getDateAddedArrow()    ?></i>  </td>
+                    </tr>
+                </table>    
+                <?php if ($status == TODO::STATUS_ALL)  : ?>
                     <table>
                         <tr>
-                            <td>  <input type="submit" name="companySortButton" value="company" class=" <?php echo $listInstance->getCompanyButtonClass()  ?> " />  </td>
-                            <td> <input type="submit" name="dateAddedSortButton" value="date added" class=<?php echo $listInstance->getDateAddedButtonClass()?> />  </td>
-                        </tr>    
+                            <td>company similar to:</td>
+                        </tr>
                         <tr>
-                            <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getCompanyArrow() ?></i>  </td>
-                            <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getDateAddedArrow()    ?></i>  </td>
+                            <td><input type="text" name="similarText" value= "<?php echo $listInstance->getSimilarText() ?>"    /></td>
+                            <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getSimilarTextIcon()    ?></i>  </td>
+                        </tr>
+                        <tr>
+                            <td>min. 3 chars</td>
+                            <td>  <input type="submit" name="similarTextSortButton" value="go" class=<?php echo $listInstance->getSimilarTextButtonClass()?> />     </td>
                         </tr>
                     </table>    
-                    <?php if ($status == TODO::STATUS_ALL)  : ?>
-                        <table>
-                            <tr>
-                                <td>company similar to:</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="similarText" value= "<?php echo $listInstance->getSimilarText() ?>"    /></td>
-                                <td class= aligncenter> <i class="material-icons multi"><?php echo $listInstance->getSimilarTextIcon()    ?></i>  </td>
-                            </tr>
-                            <tr>
-                                <td>min. 3 chars</td>
-                                <td>  <input type="submit" name="similarTextSortButton" value="go" class=<?php echo $listInstance->getSimilarTextButtonClass()?> />     </td>
-                            </tr>
-                        </table>    
-                    <?php endif; ?>
-                </div>    
-            </fieldset>
-              
-        </form>
-      </div>  
-<?php if (empty($todos)): ?>
-    <p>No TODO items found.</p>
-<?php else: ?>
-    <ul class="list">
+                <?php endif; ?>
+            </div>    
+        </fieldset>
+
+    </form>
+</div>  
+
+
+<ul class="list">
+    <?php if (empty($todos)): ?>
+        <li>
+            <h3>No TODO items found.</h3>
+        </li>
+    <?php else: ?>
         <?php foreach ($todos as $todo): ?>
             <li>
                 <h3>
-                    <?php  if ($status == TODO::STATUS_ALL) : ?>
-                        <?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>  pct: <?php echo $todo->getTempSortFloat(); ?>
-                    <?php else: ?>
-                        <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
-                        <?php echo Utils::iconPriority($todo->getPriority()); ?>
-                    <?php endif; ?>
-                    
+                <?php  if ($status == TODO::STATUS_ALL) : ?>
+                    <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>  pct: <?php echo $todo->getTempSortFloat(); ?>
+                <?php else: ?>
+                    <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
+                    <?php echo Utils::iconPriority($todo->getPriority()); ?>
+                <?php endif; ?>
+
                 </h3>
                 <?php if ($todo->getBusiness()): ?>
-                    <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
-                <?php endif; ?>
+                <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
+            <?php endif; ?>
                 <p><span class="label">date added:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></p>
             </li>
         <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+    <?php endif; ?>
+</ul>
+
