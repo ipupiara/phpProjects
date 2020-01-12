@@ -3,7 +3,7 @@
 -- Host: localhost	Database: 817636
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.3.20-MariaDB-log
--- Date: Sat, 11 Jan 2020 11:57:27 +0200
+-- Date: Sun, 12 Jan 2020 15:30:28 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,7 +44,7 @@ CREATE TABLE `applycompanies` (
   KEY `idx_todo_priority` (`priority`),
   KEY `idx_todo_company` (`company`),
   KEY `idx_todo_status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,6 +195,10 @@ INSERT INTO `applycompanies` VALUES (139,'','','','altran zürich','Hardturmstra
 INSERT INTO `applycompanies` VALUES (140,'','Erich Brönimann ,Standort in Schaffhausen/Schweiz ','','Marquardt GmbH','Schloss-Straße 16','78604 Rietheim-Weilheim','','interaktive Mechatronik\r\nTelefon +41 52 644 30 36','','OLDARCHIVE','','absage, ( suchen derzeit nur 100%) R.Carbonell','2013-04-17 08:00:00',2,9.52381);
 INSERT INTO `applycompanies` VALUES (141,'','','','Phonak AG','Laubisrütistrasse 28','CH-8712 Stäfa','','Hörsysteme\r\nTelefon +41 58 928 01 01','','OLDARCHIVE',' www.phonak.com/jobs-jobs','zeigen Mühe mit Teilzeitjobs, absage, R.carbonell','2013-05-07 08:00:00',2,25);
 INSERT INTO `applycompanies` VALUES (142,'','Marisa Lucchi, Human Resources','','Zühlke Engineering AG','Wiesenstrasse 10a','8952 Schlieren (Zürich)','','software consulting und entwicklung','','OLDARCHIVE','','typischer Sklavenhändler, wär zwar spannend und ich habe früher ständig so gearbeitet, aber 140% liegt nicht drin! absage, r.carbonell','2013-01-14 09:00:00',2,34.4828);
+INSERT INTO `applycompanies` VALUES (143,'','','','Leica Geosystems AG','','CH-5035 Unterentfelden','','Metrology Products\r\n+41 (0)62 737 67 67','','OLDARCHIVE','www.leica-geosystems.ch/metrology','nach Telefon R.Carbonell mit HR-Manager waren wir bei Leica zu besuch. Der Abteilungsleiter erklärte uns dann aber umgehend, dass bei ihm eine Einstellung nicht in Frage käme wegen zu wenige Präsenzzeit und es ginge bei ihnen immer sehr geschäftig zu und her (=chaotisch, schwache Planung? im informatiker chargon). Er wisse aber einen Ort innerhalb der Leica wo dies gut ginge. R.Carbonell fragte darauf dort an, bekam aber umgehend eine Abfuhr, \"was denen (Leica Abteilungsleiter) bloss in den Sinn käme, irgendwelche Anwärter zu ihnen zu schicken\".','2013-03-12 13:00:00',2,15.3846);
+INSERT INTO `applycompanies` VALUES (144,'','Katja Gehrig','','Kaba AG','Mühlebühlstrasse 23','8620 Wetzikon','','Schliesssysteme','','OLDARCHIVE','','telefonische Anfrage ergab kein Interesse. Sie hätten derzeit keine Vakanzen, vielleicht im neuen Budget im nächsten Jahr','2013-03-25 13:00:00',2,0);
+INSERT INTO `applycompanies` VALUES (145,'','Daniel Hug','','Zehnder Group','','5722 Gränichen','','ein Synonym für gesundes, energieeffizientes\r\nund komfortables Raumklima. Für die Zehnder Group\r\nInternational AG mit Sitz in Gränichen/AG suchen wir eine motivierte,\r\nengagierte und technik-orientier','','OLDARCHIVE','','nach telefon R. Carbonell waren wir hier beim HR zu Besuch. Hr-Besuch soweit positiv. Doch darauf kam der Besuch bei der Abteilung und diese Leute sagten die Bewerbung ab, Grund wird in der ungenauen zeitlichen Verfügung des Anwärters, sowie in der unter 100% liegenden Einsatzmöglichkeit zu suchen sein. Genaue Gründe wurden mir aber nicht angegeben. Aus eigener Erfahrung weiss ich, dass Software Entwicklungsabteilungen es sich mit Teilzeit-Kandidaten meist schwer tun.','2013-05-06 12:00:00',2,0);
+INSERT INTO `applycompanies` VALUES (146,'','','','APAG Elektronik AG','Ringstrasse 14','8600 Dübendorf','','Leiterplatten-Entwicklung, Software-Entwicklung, System-Entwicklung','','OLDARCHIVE','','Telefon R. Carbonell, Absage, kein Interesse','2013-02-21 13:00:00',2,0);
 /*!40000 ALTER TABLE `applycompanies` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -208,4 +212,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 11 Jan 2020 11:57:27 +0200
+-- Dump completed on: Sun, 12 Jan 2020 15:30:28 +0200
