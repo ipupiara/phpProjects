@@ -12,8 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/projects/phpProjects/ApplyDB/page/list.phtml</file>
-            <file>file:/D:/projects/phpProjects/ApplyDB/util/Utils.php</file>
+            <file>file:/D:/projects/phpProjects/ApplyDB/web/index.php</file>
+            <file>file:/D:/projects/phpProjects/ApplyDB/flash/Flash.php</file>
+            <file>file:/D:/projects/phpProjects/ApplyDB/layout/index.phtml</file>
         </group>
     </open-files>
 </project-private>
