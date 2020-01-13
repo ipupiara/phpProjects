@@ -14,8 +14,6 @@ use TodoList\Util\Mysqldump;
 
 $DBUSER="817636";
 $DBPASSWD="maenam22";
-//$DBUSER="root";
-//$DBPASSWD="14u24me";
 $DATABASE="817636";
 
 

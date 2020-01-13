@@ -76,6 +76,8 @@ final class TodoDao {
             $amtTodos = count($todos);
             if ($amtTodos > $amt) {
                 $result = true;
+            } else {
+                $result = false;
             }
         } catch (Exception $ex) {
             throw new Exception('error: ' . $ex->getMessage());
