@@ -225,6 +225,22 @@ final class Todo {
 
     public function setTempSortFloat($flt) {
         $this->tempSortFloat = $flt;
-    }   
+    }  
+    
+    public function getNameString()
+    {
+        $nameString = "";
+        if( $this->getTitle()){$nameString .= $this->getTitle() ; $nameString .= " ";}
+        if( $this->getPre_name()){$nameString .= $this->getPre_name()  ; $nameString .= " ";}
+        if( $this->getName()){$nameString .= $this->getName()  ;}
+        return $nameString;
+    }
+    
+    public function nameStringNotEmpty()
+    {
+        $str = $this->getNameString();
+        $len = strlen(trim($str));
+        return ($len > 0);
+    }
 }
  

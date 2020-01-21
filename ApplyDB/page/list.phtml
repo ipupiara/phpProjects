@@ -72,14 +72,19 @@ use \TodoList\Util\Utils;
                     <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a><?php echo Utils::iconPriority($todo->getPriority()); ?> <?php echo Utils::iconStatus($todo->getStatus()); ?>  pct: <?php echo $todo->getTempSortFloat(); ?>
                 <?php else: ?>
                     <a href="<?php echo Utils::createLink('detail', ['id' => $todo->getId()]) ?>"><?php echo Utils::escape($todo->getCompany()); echo ", "; echo Utils::escape($todo->getZip_city()); ?></a>
-                    <?php echo Utils::iconPriority($todo->getPriority()); ?>
+                    <!--<?php echo Utils::iconPriority($todo->getPriority()); ?>  -->
                 <?php endif; ?>
 
-                </h3>
+                </h3>   
+                <?php if ($todo->nameStringNotEmpty()): ?>
+                    <p class="description"><?php echo Utils::escape($todo->getNameString()); ?></p>
+                <?php endif; ?>
                 <?php if ($todo->getBusiness()): ?>
-                <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
-            <?php endif; ?>
-                <p><span class="label">date added:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></p>
+                    <p class="description"><?php echo Utils::escape($todo->getBusiness()); ?></p>
+                <?php endif; ?>
+                <p><span class="description">date added:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getDateAdded())); ?></p>
+                <p class="description"><?php echo Utils::escape($todo->getComment()); ?></p>
+                <br>
             </li>
         <?php endforeach; ?>
     <?php endif; ?>
