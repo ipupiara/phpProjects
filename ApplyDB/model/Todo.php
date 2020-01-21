@@ -93,6 +93,22 @@ final class Todo {
     /**
      * @return int <i>null</i> if not persistent
      */
+    
+    private function replaceAeOeUe($str)
+    {
+        $strix=utf8_encode($str);
+        $stri3 = str_replace('ÃÂ¤', 'ä', $strix);
+        $stri4 = str_replace('ÃÂ¶', 'ö', $stri3);
+        $stri5 = str_replace('ÃÂ¼', 'ü', $stri4);
+        $stri0 = str_replace('Ã¤', 'ä', $stri5);
+        $stri1 = str_replace('Ã¶', 'ö', $stri0);
+        $stri2 = str_replace('Ã¼', 'ü', $stri1);
+        
+       // return $stri2;
+        return $str;
+    }
+    
+    
     public function getId() {
         return $this->id;
     }
@@ -136,7 +152,7 @@ final class Todo {
 
     
     public function getCompany() {
-        return $this->company;
+        return $this->replaceAeOeUe($this->company);
     }
 
     public function setCompany($company) {
@@ -151,7 +167,7 @@ final class Todo {
         $this->address = $address;
     }
     public function getZip_city() {
-        return utf8_encode($this->zip_city);
+        return $this->replaceAeOeUe(($this->zip_city));
     }
 
     public function setZip_city($zC) {
@@ -165,7 +181,7 @@ final class Todo {
         $this->greeting_line = $title;
     }
     public function getBusiness() {
-        return utf8_encode($this->business);
+        return $this->replaceAeOeUe($this->business);
     }
 
     public function setBusiness($title) {
@@ -188,7 +204,7 @@ final class Todo {
     }
  
    public function getComment() {
-        return $this->comment;
+        return $this->replaceAeOeUe($this->comment);
     }
 
     public function setComment($hp) {
@@ -212,7 +228,7 @@ final class Todo {
     }
     
      public function getStatus() {
-        return utf8_encode($this->status);
+        return $this->replaceAeOeUe(($this->status));
     }
     public function setStatus($status) {
         TodoValidator::validateStatus($status);
@@ -233,7 +249,7 @@ final class Todo {
         if( $this->getTitle()){$nameString .= $this->getTitle() ; $nameString .= " ";}
         if( $this->getPre_name()){$nameString .= $this->getPre_name()  ; $nameString .= " ";}
         if( $this->getName()){$nameString .= $this->getName()  ;}
-        return utf8_encode($nameString);
+        return $this->replaceAeOeUe($nameString);
     }
     
     public function nameStringNotEmpty()
