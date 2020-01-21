@@ -140,18 +140,18 @@ final class Todo {
     }
 
     public function setCompany($company) {
-        $this->company = $company;
+        $this->company = utf8_encode($company);
     }
     
     public function getAddress() {
-        return $this->address;
+        return utf8_encode($this->address);
     }
 
     public function setAddress($address) {
         $this->address = $address;
     }
     public function getZip_city() {
-        return $this->zip_city;
+        return utf8_encode($this->zip_city);
     }
 
     public function setZip_city($zC) {
@@ -165,7 +165,7 @@ final class Todo {
         $this->greeting_line = $title;
     }
     public function getBusiness() {
-        return $this->business;
+        return utf8_encode($this->business);
     }
 
     public function setBusiness($title) {
@@ -212,7 +212,7 @@ final class Todo {
     }
     
      public function getStatus() {
-        return $this->status;
+        return utf8_encode($this->status);
     }
     public function setStatus($status) {
         TodoValidator::validateStatus($status);
@@ -233,7 +233,7 @@ final class Todo {
         if( $this->getTitle()){$nameString .= $this->getTitle() ; $nameString .= " ";}
         if( $this->getPre_name()){$nameString .= $this->getPre_name()  ; $nameString .= " ";}
         if( $this->getName()){$nameString .= $this->getName()  ;}
-        return $nameString;
+        return utf8_encode($nameString);
     }
     
     public function nameStringNotEmpty()
